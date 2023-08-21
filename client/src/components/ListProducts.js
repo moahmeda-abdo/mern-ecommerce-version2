@@ -1,10 +1,20 @@
-import data from "../data";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+
 export default function ListProducts() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get("http://localhost:5000/api/products");
+      setProducts(result.data);
+    };
+    fetchData();
+  }, []);
   return (
     <main>
       <h1>Featured Products</h1>
-      <div className="products">
-        {data.products.map((product) => (
+      { <div className="products">
+        {products.map((product) => (
           <div className="product" key={product.slug}>
             <a href={`/products/${product.slug}`}>
               <img src={product.image} alt={product.name} />
@@ -20,7 +30,7 @@ export default function ListProducts() {
             </div>
           </div>
         ))}
-      </div>
+      </div> }
     </main>
   );
 }
