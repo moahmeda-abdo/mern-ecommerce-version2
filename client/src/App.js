@@ -1,14 +1,19 @@
-
-
 import ListProducts from "./components/ListProducts";
 import Navbar from "./components/Navbar";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ProductPage from "./pages/ProductPage";
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <ListProducts />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products/:slug" element={<ProductPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
