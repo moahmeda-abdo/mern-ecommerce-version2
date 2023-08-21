@@ -1,11 +1,14 @@
 
-import './App.css';
+
+import ListProducts from "./components/ListProducts";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
-asvav
-    </div> 
+      <Navbar />
+      <ListProducts />
+    </div>
   );
 }
 
