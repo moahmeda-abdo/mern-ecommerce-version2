@@ -21,3 +21,9 @@
  ->
  - usereducer to manage state
  
+ 
+ 
+ ->
+  - adding bootstarp
+  - create product card and rating
+ 
