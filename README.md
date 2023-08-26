@@ -14,3 +14,10 @@
 3. use state & effect hook 
 4. use reducer hook
  - download cors % and use app.use(cors(corsOptions))to give access to frontend
+ 
+ 
+ 
+ 
+ ->
+ - usereducer to manage state
+ 

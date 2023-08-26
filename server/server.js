@@ -10,8 +10,8 @@ dotenv.config();
 const corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200, 
-};
-
+}; 
+ 
 app.use(cors(corsOptions));
 app.get("/api/products", (req, res) => {
   res.send(data.products);
