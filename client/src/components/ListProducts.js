@@ -4,6 +4,9 @@ import logger from "use-reducer-logger";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ProductCard from '../components/ProductCard';
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+
 export default function ListProducts() {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -43,18 +46,17 @@ export default function ListProducts() {
       {
         <div className="products">
           {loading ? (
-            <span className="loader"></span>
+            <LoadingBox />
           ) : error ? (
-            <div>{error.message}</div>
+            <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <Row>
-            {products.map((product) => (
-              <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                <ProductCard product={product}></ProductCard>
-              </Col>
-            ))}
-          </Row>
-
+              {products.map((product) => (
+                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
+                  <ProductCard product={product}></ProductCard>
+                </Col>
+              ))}
+            </Row>
           )}
         </div>
       }
