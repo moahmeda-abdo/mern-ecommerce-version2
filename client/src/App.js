@@ -6,6 +6,7 @@ import ProductPage from "./pages/ProductPage";
 
 import NavigationBar from "./components/NavigationBar";
 import Container from "react-bootstrap/esm/Container";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products/:slug" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </Container>
       </BrowserRouter>
