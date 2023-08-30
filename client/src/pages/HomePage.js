@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <div className="home">
-          <Helmet>
+      <Helmet>
         <title>Amazona</title>
       </Helmet>
-      <Link a> mvopd</Link>
+      <Link to="/cart"> mvopd</Link>
       <ListProducts />
     </div>
   );

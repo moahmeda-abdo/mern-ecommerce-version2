@@ -5,16 +5,18 @@ import './index.css';
 import App from './App';
 import { HelmetProvider } from "react-helmet-async";
 import { StoreProvider } from './pages/Store';
-
+import { ChakraProvider } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ChakraProvider>
       <StoreProvider>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </StoreProvider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

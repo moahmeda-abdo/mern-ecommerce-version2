@@ -5,11 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import { useContext } from "react";
 import { Store } from "../pages/Store";
 import { Link } from 'react-router-dom';
-// import Container from 'react-bootstrap/Container';.
-
 
 export default function NavigationBar() {
-
   const { state } = useContext(Store);
   const { cart } = state;
 
@@ -18,14 +15,10 @@ export default function NavigationBar() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Container to="/">
-            <Navbar.Brand>
-              <a href="/" className="nav-link ">
-                amazona
-              </a>
-            </Navbar.Brand>
+            <Navbar.Brand href='/'>amazona</Navbar.Brand>
           </Container>
           <Nav className="me-auto">
-            <Link onClick={handleLink} href="/cart" className="nav-link ">
+            <Link href="/cart" className="nav-link ">
               Cart
               {cart.cartItems.length > 0 && (
                 <Badge pill bg="danger">
