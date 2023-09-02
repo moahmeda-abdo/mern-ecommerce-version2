@@ -18,7 +18,7 @@ export default function NavigationBar() {
             <Navbar.Brand href='/'>amazona</Navbar.Brand>
           </Container>
           <Nav className="me-auto">
-            <Link href="/cart" className="nav-link ">
+            <Link to="/cart" className="nav-link ">
               Cart
               {cart.cartItems.length > 0 && (
                 <Badge pill bg="danger">

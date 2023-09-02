@@ -9,7 +9,6 @@ export default function HomePage() {
       <Helmet>
         <title>Amazona</title>
       </Helmet>
-      <Link to="/cart"> mvopd</Link>
       <ListProducts />
     </div>
   );
