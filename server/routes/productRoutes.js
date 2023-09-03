@@ -12,6 +12,6 @@ productRouter.get("/", handleAllProdcuts);
 
 productRouter.get("/api/products/slug/:slug", handleSlugProdcuts);
 
-productRouter.get("/api/products/:id", handleIdProdcuts);
+productRouter.get("/:id", handleIdProdcuts);
 
 export default productRouter;

@@ -11,7 +11,7 @@ const handleSlugProdcuts = asyncHandler(async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: "product not found" });
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
 
@@ -20,8 +20,7 @@ const handleIdProdcuts = asyncHandler(async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: "Product Not Found" });
-    console.log("product sent");
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
 

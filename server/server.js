@@ -1,10 +1,11 @@
 import express from "express";
-import data from "./data.js";
+
 import dotenv from "dotenv";
 import cors from "cors"
 import mongoose from "mongoose";
-import Product from './models/productModel.js';
+
 import productRouter from "./routes/productRoutes.js";
+import seedRouter from "./routes/seedRoutes.js";
 
 const app = express();
 
@@ -27,13 +28,7 @@ app.use(cors(corsOptions));
 
 
 
-app.get('/', async (req, res) => {
-  await Product.remove({});
-  const createdProducts = await Product.insertMany(data.products);
-  res.send({ createdProducts });
-});
- 
-
+app.use('/api/seed', seedRouter);
 app.use("/api/products", productRouter);
 
 
