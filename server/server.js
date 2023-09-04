@@ -18,7 +18,7 @@ mongoose
 })
 .catch((err) => {
   console.log(err.message);  
-});
+}); 
 
 const corsOptions = {
   origin: "http://localhost:3000",

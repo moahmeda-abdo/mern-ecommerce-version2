@@ -7,7 +7,7 @@ const handleAllProdcuts = asyncHandler(async (req, res) => {
 });
 
 const handleSlugProdcuts = asyncHandler(async (req, res) => {
-  const product = await Product.findOne((x) => x.slug === req.params.slug);
+  const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
   } else {
