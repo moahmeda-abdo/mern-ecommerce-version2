@@ -1,12 +1,12 @@
-import asyncHandler from "express-async-handler";
+import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 
-const handleAllProdcuts = asyncHandler(async (req, res) => {
+const handleAllProdcuts = expressAsyncHandler(async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
 
-const handleSlugProdcuts = asyncHandler(async (req, res) => {
+const handleSlugProdcuts = expressAsyncHandler(async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
@@ -15,7 +15,7 @@ const handleSlugProdcuts = asyncHandler(async (req, res) => {
   }
 });
 
-const handleIdProdcuts = asyncHandler(async (req, res) => {
+const handleIdProdcuts = expressAsyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
     res.send(product);

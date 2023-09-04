@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 import productRouter from "./routes/productRoutes.js";
 import seedRouter from "./routes/seedRoutes.js";
+import { userRouter } from "./routes/userRoutes.js";
 
 const app = express();
 
@@ -26,10 +27,12 @@ const corsOptions = {
 }; 
 app.use(cors(corsOptions));
 
-
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 app.use('/api/seed', seedRouter);
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 
 
 const port = process.env.PORT || 5000;
