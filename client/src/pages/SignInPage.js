@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import { Link, useLocation } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Store } from "./Store";
+import { getError } from "../utils";
+import { toast } from 'react-toastify';
 export default function SignInPage() {
+  const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/users/signin", {
+        email,
+        password,
+      });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/");
+    } catch (err) {    toast.error(getError(err));}
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [navigate, redirect, userInfo]);
+  
   return (
     <>
       <Container className="small-container">
@@ -16,20 +44,34 @@ export default function SignInPage() {
           <title>Sign In</title>
         </Helmet>
         <h1 className="my-3">Sign In</h1>
-        <Form>
+        <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="name@example.com" />
+            <Form.Control
+              type="email"
+              placeholder="name@example.com"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="password" />
+            <Form.Control
+              type="password"
+              autoComplete="section-blue shipping postal-code"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </Form.Group>
-          <Button className="mb-3" type="Submit">Sumbit</Button>
+          <Button className="mb-3" type="Submit">
+            Sumbit
+          </Button>
         </Form>
         <div className="mb-3">
           New customer?{" "}
-          <Link className="text-primary " to={`/signup?redirect=${redirect}`}>Create your account</Link>
+          <Link className="text-primary " to={`/signup?redirect=${redirect}`}>
+            Create your account
+          </Link>
         </div>
       </Container>
     </>

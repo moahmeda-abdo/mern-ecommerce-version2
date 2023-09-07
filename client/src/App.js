@@ -5,13 +5,15 @@ import Container from "react-bootstrap/esm/Container";
 import CartPage from "./pages/CartPage";
 import NavigationBar from "./components/NavigationBar";
 import SignInPage from "./pages/SignInPage";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <NavigationBar />
+        <ToastContainer position="bottom-center" limit={1} />
         <Container>
           <Routes>
             <Route path="/" element={<HomePage />} />
