@@ -15,8 +15,12 @@ export default function ShippingAddresspage() {
     cart: { shippingAddress },
   } = state;
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    shippingAddress.phoneNumber || ""
+  );
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
+  const [country, setCountry] = useState(shippingAddress.country || "");
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ""
   );
@@ -25,13 +29,13 @@ export default function ShippingAddresspage() {
       navigate("/signin?redirect=/shipping");
     }
   }, [userInfo, navigate]);
-  const [country, setCountry] = useState(shippingAddress.country || "");
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: {
         fullName,
+        phoneNumber,
         address,
         city,
         postalCode,
@@ -42,6 +46,7 @@ export default function ShippingAddresspage() {
       "shippingAddress",
       JSON.stringify({
         fullName,
+        phoneNumber,
         address,
         city,
         postalCode,
@@ -65,6 +70,14 @@ export default function ShippingAddresspage() {
             <Form.Control
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="phoneNumber">
+            <Form.Label>Phone Number</Form.Label>
+            <Form.Control
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
           </Form.Group>
