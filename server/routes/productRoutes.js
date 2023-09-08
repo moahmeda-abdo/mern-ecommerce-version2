@@ -10,7 +10,7 @@ const productRouter = express.Router();
 
 productRouter.get("/", handleAllProdcuts);
 
-productRouter.get("/api/products/slug/:slug", handleSlugProdcuts);
+productRouter.get("/slug/:slug", handleSlugProdcuts);
 
 productRouter.get("/:id", handleIdProdcuts);
 

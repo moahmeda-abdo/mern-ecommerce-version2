@@ -42,7 +42,7 @@ export default function ProductPage() {
 
       try {
         const result = await axios.get(
-          `http://localhost:5000/api/products/slug/${slug}`
+          `/api/products/slug/${slug}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (error) {
