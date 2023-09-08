@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddresspage from "./pages/ShippingAddresspage";
 import SignUpPage from "./pages/Signup";
 import PaymentPage from "./pages/PaymentPage";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
 
 
 
@@ -27,8 +28,8 @@ function App() {
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/shipping" element={<ShippingAddresspage />} />
-            <Route path="/payment" element={<PaymentPage/>}></Route>
- 
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/placeorder" element={<PlaceOrderPage />} />
           </Routes>
         </Container>
       </BrowserRouter>

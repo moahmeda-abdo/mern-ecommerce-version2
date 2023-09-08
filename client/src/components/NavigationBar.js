@@ -47,7 +47,6 @@ export default function NavigationBar() {
                 <NavDropdown.Divider />
                 <Link
                   className="dropdown-item"
-                  to="#signout"
                   onClick={signoutHandler}
                 >
                   Sign Out
