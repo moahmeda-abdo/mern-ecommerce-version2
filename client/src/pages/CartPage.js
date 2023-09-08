@@ -10,10 +10,11 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
 import axios from "axios";
 
+
 export default function CartPage() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
-
+  const { userInfo } = state;
   const {
     cart: { cartItems },
   } = state;
@@ -21,22 +22,26 @@ export default function CartPage() {
   const updateCartHandler = async (item, quantity) => {
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
+      window.alert("Sorry. Product is out of stock");
       return;
     }
     ctxDispatch({
-      type: 'CART_ADD_ITEM',
+      type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
     console.log("m");
   };
   const removeItemHandler = (item) => {
-    // ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+    ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
     console.log("F");
   };
 
   const checkoutHandler = () => {
-    navigate("/signin?redirect=/shipping");
+    if (userInfo) {
+      navigate("/shipping");
+    } else {
+      navigate("/signin");
+    }
   };
 
   return (
@@ -44,6 +49,7 @@ export default function CartPage() {
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
+
       <h1>Shopping Cart</h1>
       <Row>
         <Col md={8}>
@@ -68,7 +74,9 @@ export default function CartPage() {
                       <Button variant="light" disabled={item.quantity === 1}>
                         <i
                           className="fas fa-minus-circle"
-                          onClick={updateCartHandler(item, item.quantity - 1)}
+                          onClick={() =>
+                            updateCartHandler(item, item.quantity - 1)
+                          }
                         ></i>
                       </Button>{" "}
                       <span>{item.quantity}</span>{" "}
@@ -78,7 +86,9 @@ export default function CartPage() {
                       >
                         <i
                           className="fas fa-plus-circle"
-                          onClick={updateCartHandler(item, item.quantity + 1)}
+                          onClick={() =>
+                            updateCartHandler(item, item.quantity + 1)
+                          }
                         ></i>
                       </Button>
                     </Col>
@@ -87,7 +97,7 @@ export default function CartPage() {
                       <Button variant="light">
                         <i
                           className="fas fa-trash"
-                          onClick={removeItemHandler(item)}
+                          onClick={() => removeItemHandler(item)}
                           variant="light"
                         ></i>
                       </Button>
