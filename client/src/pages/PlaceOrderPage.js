@@ -48,6 +48,7 @@ export default function PlaceOrderPage() {
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
+      console.log(cart.cartItems[0]._id);
 
       const { data } = await axios.post(
         "/api/orders",
@@ -67,6 +68,16 @@ export default function PlaceOrderPage() {
         }
       );
 
+      const productData = [];
+      cart.cartItems.forEach((item) => {
+        productData.push({
+          productId: item._id,
+          quantity: item.quantity,
+        });
+      });
+      const { updateproduct } = await axios.put("/api/products/updateproduct", {
+        products: productData,
+      });
       ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
       localStorage.removeItem("cartItems");
@@ -76,6 +87,7 @@ export default function PlaceOrderPage() {
       toast.error(getError(err));
     }
   };
+
   useEffect(() => {
     if (!cart.paymentMethod) {
       navigate("/payment");

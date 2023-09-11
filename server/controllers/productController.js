@@ -24,4 +24,29 @@ const handleIdProdcuts = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export { handleAllProdcuts, handleIdProdcuts, handleSlugProdcuts };
+const handleUpdateProdcuts = expressAsyncHandler(async (req, res) => {
+  try {
+    const { products } = req.body;
+    products.forEach(async (productData) => {
+      const { productId, quantity } = productData;
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      const updatedCountInStock = product.countInStock - quantity;
+      product.countInStock = updatedCountInStock;
+      await product.save();
+    });
+    res.status(200).json({ message: "Products updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+export {
+  handleAllProdcuts,
+  handleIdProdcuts,
+  handleSlugProdcuts,
+  handleUpdateProdcuts,
+};
