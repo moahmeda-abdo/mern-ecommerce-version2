@@ -27,5 +27,18 @@ const handleOrders = expressAsyncHandler(async (req, res) => {
   res.status(201).send({ message: "New Order Created", order });
 });
 
+const handleIdOrders = expressAsyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.send(order);
+  } else {
+    res.status(404).send({ message: "Order Not Found" });
+  }
+});
 
-export{handleOrders}
+const handleUserOrders = expressAsyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  console.log(req.user)
+  res.send(orders);
+});
+export { handleOrders, handleIdOrders, handleUserOrders };

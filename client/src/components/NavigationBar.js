@@ -28,7 +28,7 @@ export default function NavigationBar() {
             <Navbar.Brand href="/">amazona</Navbar.Brand>
           </Container>
           <Nav className="me-auto">
-            <Link to="/cart" className="nav-link ">
+            <Link to="/cart" className="nav-link">
               Cart
               {cart.cartItems.length > 0 && (
                 <Badge pill bg="danger">
@@ -41,14 +41,14 @@ export default function NavigationBar() {
                 <Link to="/profile">
                   <NavDropdown.Item>User Profile</NavDropdown.Item>
                 </Link>
-                <Link to="/orderhistory">
-                  <NavDropdown.Item>Order History</NavDropdown.Item>
-                </Link>
+
+                <NavDropdown.Item>
+                  {" "}
+                  <Link to="/orderhistory">Order History</Link>
+                </NavDropdown.Item>
+
                 <NavDropdown.Divider />
-                <Link
-                  className="dropdown-item"
-                  onClick={signoutHandler}
-                >
+                <Link className="dropdown-item" onClick={signoutHandler}>
                   Sign Out
                 </Link>
               </NavDropdown>
