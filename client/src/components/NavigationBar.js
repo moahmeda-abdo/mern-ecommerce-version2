@@ -38,9 +38,9 @@ export default function NavigationBar() {
             </Link>
             {userInfo ? (
               <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                <Link to="/profile">
-                  <NavDropdown.Item>User Profile</NavDropdown.Item>
-                </Link>
+                <NavDropdown.Item>
+                  <Link to="/profile">User Profile</Link>
+                </NavDropdown.Item>
 
                 <NavDropdown.Item>
                   {" "}

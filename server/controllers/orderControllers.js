@@ -38,7 +38,6 @@ const handleIdOrders = expressAsyncHandler(async (req, res) => {
 
 const handleUserOrders = expressAsyncHandler(async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
-  console.log(req.user)
   res.send(orders);
 });
 export { handleOrders, handleIdOrders, handleUserOrders };

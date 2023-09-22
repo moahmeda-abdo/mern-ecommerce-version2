@@ -13,6 +13,7 @@ import PaymentPage from "./pages/PaymentPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
 import OrderHistory from "./pages/OrderHistory";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/placeorder" element={<PlaceOrderPage />} />
             <Route path="/order/:id" element={<OrderPage />} />
             <Route path="/orderhistory" element={<OrderHistory />} />
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </Container>
       </BrowserRouter>
