@@ -5,8 +5,8 @@ import Container from "react-bootstrap/esm/Container";
 import CartPage from "./pages/CartPage";
 import NavigationBar from "./components/NavigationBar";
 import SignInPage from "./pages/SignInPage";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ShippingAddresspage from "./pages/ShippingAddresspage";
 import SignUpPage from "./pages/Signup";
 import PaymentPage from "./pages/PaymentPage";
@@ -14,28 +14,74 @@ import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderPage from "./pages/OrderPage";
 import OrderHistory from "./pages/OrderHistory";
 import UserProfile from "./pages/UserProfile";
+import { useEffect, useState } from "react";
+import { Button, Nav } from "react-bootstrap";
+import axios from "axios";
+import { getError } from "./utils";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const categories = ["Shirt", "Pants", "Sweet Shirts"];
+  // const [categories, setCategoriess] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const { data } = await axios.get(`/api/products/categories`);
+  //       setCategories(data);
+  //     } catch (err) {
+  //       toast.error(getError(err));
+  //       console.log(err)
+  //     }
+  //   };
+  //   fetchCategories();
+  // }, []);
   return (
     <>
       <BrowserRouter>
         <NavigationBar />
         <ToastContainer position="bottom-center" limit={1} />
-        <Container>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products/:slug" element={<ProductPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/signin" element={<SignInPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/shipping" element={<ShippingAddresspage />} />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/placeorder" element={<PlaceOrderPage />} />
-            <Route path="/order/:id" element={<OrderPage />} />
-            <Route path="/orderhistory" element={<OrderHistory />} />
-            <Route path="/profile" element={<UserProfile />} />
-          </Routes>
-        </Container>
+        <div className={isOpen ? "sidebar active-sidebar" : "sidebar"}>
+          {" "}
+          <div>
+            {" "}
+            <Nav className="flex-column text-white w-100 p-2">
+              <Nav.Item>
+                <strong>Categories</strong>
+              </Nav.Item>
+              {categories.map((category) => (
+                <Nav.Item key={category}>
+                  <>
+                    <Nav.Link>{category}</Nav.Link>
+                  </>
+                </Nav.Item>
+              ))}
+            </Nav>
+            <Button
+              className="toggle-sidebar"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </Button>{" "}
+          </div>
+        </div>
+        <div className={isOpen ? "active-container" : "normal-container"}>
+          <Container>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/products/:slug" element={<ProductPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/signin" element={<SignInPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/shipping" element={<ShippingAddresspage />} />
+              <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/placeorder" element={<PlaceOrderPage />} />
+              <Route path="/order/:id" element={<OrderPage />} />
+              <Route path="/orderhistory" element={<OrderHistory />} />
+              <Route path="/profile" element={<UserProfile />} />
+            </Routes>
+          </Container>
+        </div>
       </BrowserRouter>
     </>
   );

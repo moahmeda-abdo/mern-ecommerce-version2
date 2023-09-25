@@ -25,6 +25,10 @@ main {
   padding: 1rem;
   flex: 1;
 }
+.site-container {
+  min-height: 100vh;
+  transition: .4s;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -104,4 +108,38 @@ main {
 .checkout-steps>div.active {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
+}
+/*************************/
+.active-container {
+  margin-left: 240px;
+  transition: .5s;
+  height: 100vh;
+}
+.normal-container{
+  transition: .5s;
+}
+
+.sidebar {
+  width: 240px;
+  height: 100%;
+  position: absolute;
+  left: -240px;
+  background-color: #212529;
+  transition: 0.5s;
+}
+.active-sidebar{
+left: 0;
+}
+
+.toggle-sidebar {
+  background-color: #212529;
+  border: none;
+  position: absolute;
+  right: -30px;
+  top: 100px;
+}
+
+.toggle-sidebar i {
+  color: white;
+
 }

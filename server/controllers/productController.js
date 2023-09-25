@@ -44,9 +44,15 @@ const handleUpdateProdcuts = expressAsyncHandler(async (req, res) => {
   }
 });
 
+
+const handleCategories = expressAsyncHandler(async (req, res) => {
+  const categoriess = await Product.distinct("category");
+  res.send(categoriess);
+});
 export {
   handleAllProdcuts,
   handleIdProdcuts,
   handleSlugProdcuts,
   handleUpdateProdcuts,
+  handleCategories,
 };

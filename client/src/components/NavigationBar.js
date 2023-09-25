@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { Store } from "../pages/Store";
 import { Link } from 'react-router-dom';
 import NavDropdown from "react-bootstrap/NavDropdown";
+import SearchBox from './SearchBox';
 // import { LinkContainer } from "react-router-bootstrap";
 
 export default function NavigationBar() {
@@ -28,6 +29,7 @@ export default function NavigationBar() {
             <Navbar.Brand href="/">amazona</Navbar.Brand>
           </Container>
           <Nav className="me-auto">
+              <SearchBox />
             <Link to="/cart" className="nav-link">
               Cart
               {cart.cartItems.length > 0 && (
@@ -54,7 +56,7 @@ export default function NavigationBar() {
               </NavDropdown>
             ) : (
               <Link className="nav-link" to="/signin">
-                Sign In
+                Sign 
               </Link>
             )}
           </Nav>
