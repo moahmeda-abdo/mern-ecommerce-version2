@@ -16,8 +16,9 @@ import OrderHistory from "./pages/OrderHistory";
 import UserProfile from "./pages/UserProfile";
 import { useEffect, useState } from "react";
 import { Button, Nav } from "react-bootstrap";
-import axios from "axios";
-import { getError } from "./utils";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import AdminRoutes from "./components/AdminRoutes";
+import AdminDashbaord from "./pages/AdminDashbaord";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,8 +78,31 @@ function App() {
               <Route path="/payment" element={<PaymentPage />} />
               <Route path="/placeorder" element={<PlaceOrderPage />} />
               <Route path="/order/:id" element={<OrderPage />} />
-              <Route path="/orderhistory" element={<OrderHistory />} />
-              <Route path="/profile" element={<UserProfile />} />
+              <Route
+                path="/orderhistory"
+                element={
+                  <ProtectedRoutes>
+                    <OrderHistory />
+                  </ProtectedRoutes>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoutes>
+                    <UserProfile />
+                  </ProtectedRoutes>
+                }
+              />
+              {/* ********admin routes******* */}
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoutes>
+                    <AdminDashbaord />
+                  </AdminRoutes>
+                }
+              />
             </Routes>
           </Container>
         </div>

@@ -59,6 +59,7 @@ export default function NavigationBar() {
                 Sign 
               </Link>
             )}
+            {userInfo && userInfo.isAdmin && (<Link className="nav-link " to='/admin/dashboard'>Dashboard</Link>)}
           </Nav>
         </Container>
       </Navbar>
