@@ -19,24 +19,26 @@ import { Button, Nav } from "react-bootstrap";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import AdminRoutes from "./components/AdminRoutes";
 import AdminDashbaord from "./pages/AdminDashbaord";
+import { getError } from "./utils";
+import axios from "axios";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const categories = ["Shirt", "Pants", "Sweet Shirts"];
-  // const [categories, setCategoriess] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchCategories = async () => {
-  //     try {
-  //       const { data } = await axios.get(`/api/products/categories`);
-  //       setCategories(data);
-  //     } catch (err) {
-  //       toast.error(getError(err));
-  //       console.log(err)
-  //     }
-  //   };
-  //   fetchCategories();
-  // }, []);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+        console.log(err);
+      }
+    };
+    fetchCategories();
+  }, []);
   return (
     <>
       <BrowserRouter>
