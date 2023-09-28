@@ -38,9 +38,7 @@ export default function OrderHistoryScreen() {
           `/api/orders/orderhistory`,
 
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
-
         );
-        console.log(userInfo.token)
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         dispatch({

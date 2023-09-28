@@ -49,10 +49,29 @@ const handleCategories = expressAsyncHandler(async (req, res) => {
   const categoriess = await Product.distinct("category");
   res.send(categoriess);
 });
+
+const handleAllProdcutsForAdmin = expressAsyncHandler(async (req, res) => {
+  const products =await Product.find();
+  res.send(products);
+});
+
+const handleDeleteForAdmin = expressAsyncHandler(async (req, res) => {
+  const deletedProduct = await Product.findByIdAndRemove(req.params.id);
+
+  if (deletedProduct) {
+    res.status(200).json({ message: 'Product deleted successfully' });
+    
+  } else {
+    res.status(404).send({ message: 'Something went Error' });
+  }
+});
+
 export {
   handleAllProdcuts,
   handleIdProdcuts,
   handleSlugProdcuts,
   handleUpdateProdcuts,
   handleCategories,
+  handleAllProdcutsForAdmin,
+  handleDeleteForAdmin
 };

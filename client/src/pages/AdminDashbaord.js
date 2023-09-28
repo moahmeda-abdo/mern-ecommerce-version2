@@ -9,6 +9,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { Store } from "./Store";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -54,7 +56,15 @@ export default function DashboardScreen() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Row>
+        <h1 c>Dashboard</h1>
+
+        <div>
+          <Link to="/admin/products">
+            <Button className="my-3">Manage Products</Button>
+          </Link>
+        </div>
+      </Row>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -95,7 +105,7 @@ export default function DashboardScreen() {
                       ? summary.orders[0].totalSales.toFixed(2)
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
+                  <Card.Text> Total Sales</Card.Text>
                 </Card.Body>
               </Card>
             </Col>
