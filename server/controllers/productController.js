@@ -66,6 +66,37 @@ const handleDeleteForAdmin = expressAsyncHandler(async (req, res) => {
   }
 });
 
+"Product validation failed: image: Cast to string failed for value \"{}\" (type Object) at path \"image\", numReviews: Path `numReviews` is required., rating: Path `rating` is required., price: Path `price` is required."
+
+const handleCreateProdcutsForAdmin = expressAsyncHandler(async (req, res) => {
+  const {
+    name,
+    price,
+    description,
+    slug,
+    brand,
+    countInStock,
+    image,
+    category,
+  } = req.body;
+
+  const newProduct = new Product({
+    name:name,
+    category:category,
+    slug:slug,
+    price:slug,
+    description:description,
+    countInStock:countInStock,
+    image:image,
+    brand:brand,
+    numReviews:3,
+    rating:5
+    
+  });
+
+  const product = await newProduct.save();
+  res.status(201).send({ message: "Product Created", product });
+});
 export {
   handleAllProdcuts,
   handleIdProdcuts,
@@ -73,5 +104,6 @@ export {
   handleUpdateProdcuts,
   handleCategories,
   handleAllProdcutsForAdmin,
-  handleDeleteForAdmin
+  handleDeleteForAdmin,
+  handleCreateProdcutsForAdmin,
 };

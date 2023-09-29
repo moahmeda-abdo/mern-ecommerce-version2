@@ -22,6 +22,7 @@ import AdminDashbaord from "./pages/AdminDashbaord";
 import { getError } from "./utils";
 import axios from "axios";
 import AdminProductList from "./pages/AdminProductList";
+import AdminCreateProduct from "./pages/AdminCreateProduct";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -111,6 +112,14 @@ function App() {
                 element={
                   <AdminRoutes>
                     <AdminProductList />
+                  </AdminRoutes>
+                }
+              />
+              <Route
+                path="/admin/products/create"
+                element={
+                  <AdminRoutes>
+                    <AdminCreateProduct/>
                   </AdminRoutes>
                 }
               />

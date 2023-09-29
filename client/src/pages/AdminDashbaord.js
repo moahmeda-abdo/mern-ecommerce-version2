@@ -31,7 +31,7 @@ const reducer = (state, action) => {
 export default function DashboardScreen() {
   const [{ loading, summary, error }, dispatch] = useReducer(logger(reducer), {
     loading: true,
-    error: "",
+    error: "", 
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -57,11 +57,14 @@ export default function DashboardScreen() {
   return (
     <div>
       <Row>
-        <h1 c>Dashboard</h1>
+        <h1 >Dashboard</h1>
 
         <div>
           <Link to="/admin/products">
             <Button className="my-3">Manage Products</Button>
+          </Link>
+          <Link to="/admin/products/create">
+            <Button className="m-3">Create Products</Button>
           </Link>
         </div>
       </Row>

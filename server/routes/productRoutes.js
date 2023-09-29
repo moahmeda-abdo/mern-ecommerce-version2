@@ -4,6 +4,7 @@ import {
   handleAllProdcuts,
   handleAllProdcutsForAdmin,
   handleCategories,
+  handleCreateProdcutsForAdmin,
   handleDeleteForAdmin,
   handleIdProdcuts,
   handleSlugProdcuts,
@@ -18,6 +19,8 @@ productRouter.get("/", handleAllProdcuts);
 productRouter.delete("/:id",isAuth, isAdmin, handleDeleteForAdmin);
 
 productRouter.get("/admin",isAuth,isAdmin ,handleAllProdcutsForAdmin);
+
+productRouter.post("/create",isAuth,isAdmin ,handleCreateProdcutsForAdmin);
 
 productRouter.get("/categories", handleCategories);
 
