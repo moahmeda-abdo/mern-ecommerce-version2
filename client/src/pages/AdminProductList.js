@@ -32,6 +32,7 @@ export default function AdminProductList() {
     error: "",
     products: [],
   });
+  
   const handleDelete = async (productId) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this product?"

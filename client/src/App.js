@@ -25,6 +25,7 @@ import AdminProductList from "./pages/AdminProductList";
 import AdminCreateProduct from "./pages/AdminCreateProduct";
 import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminListOrders from "./pages/AdminListOrders";
+import AdminListUsers from "./pages/AdminListUsers";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -138,6 +139,14 @@ function App() {
                 element={
                   <AdminRoutes>
                     <AdminListOrders />
+                  </AdminRoutes>
+                }
+              />
+              <Route
+                path="/admin/users"
+                element={
+                  <AdminRoutes>
+                    <AdminListUsers />
                   </AdminRoutes>
                 }
               />

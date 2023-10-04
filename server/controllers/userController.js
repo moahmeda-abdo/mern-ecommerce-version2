@@ -54,4 +54,24 @@ const handleSignUp = expressAsyncHandler(async (req, res) => {
     });
   }
 });
-export { handleSignin, handleSignUp };
+const handleUsersForAdmin = expressAsyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.send(users);
+});
+
+const handleDeleteForAdmin = expressAsyncHandler(async (req, res) => {
+  const deletedUser = await User.findByIdAndRemove(req.params.id);
+
+  if (deletedUser) {
+    res.status(200).json({ message: "User deleted successfully" });
+  } else {
+    res.status(404).send({ message: "Something went Error" });
+  }
+});
+
+export {
+  handleSignin,
+  handleSignUp,
+  handleUsersForAdmin,
+  handleDeleteForAdmin,
+};

@@ -61,10 +61,16 @@ export default function DashboardScreen() {
 
         <div>
           <Link to="/admin/products">
-            <Button className="my-3">Manage Products</Button>
+            <Button className="m-2">Manage Products</Button>
           </Link>
           <Link to="/admin/products/create">
-            <Button className="m-3">Create Products</Button>
+            <Button className="m-2">Create Products</Button>
+          </Link>
+          <Link to="/admin/orders">
+            <Button className="m-2">Manage Orders</Button>
+          </Link>
+          <Link to="/admin/users">
+            <Button className="m-2">Manage Users</Button>
           </Link>
         </div>
       </Row>

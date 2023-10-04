@@ -66,7 +66,6 @@ const handleDeleteForAdmin = expressAsyncHandler(async (req, res) => {
   }
 });
 
-"Product validation failed: image: Cast to string failed for value \"{}\" (type Object) at path \"image\", numReviews: Path `numReviews` is required., rating: Path `rating` is required., price: Path `price` is required."
 
 const handleCreateProdcutsForAdmin = expressAsyncHandler(async (req, res) => {
   const {
