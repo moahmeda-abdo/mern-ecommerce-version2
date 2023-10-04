@@ -89,4 +89,16 @@ const handleSummary = expressAsyncHandler(async (req, res) => {
 
   res.send(summaryData);
 });
-export { handleOrders, handleIdOrders, handleUserOrders, handleSummary };
+
+
+const handleOrdersForAdmin = expressAsyncHandler(async (req, res) => {
+  const orders = await Order.find().populate("user", "name");
+  res.send(orders);
+});
+export {
+  handleOrders,
+  handleIdOrders,
+  handleUserOrders,
+  handleSummary,
+  handleOrdersForAdmin,
+};

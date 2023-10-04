@@ -9,6 +9,7 @@ import {
   handleIdProdcuts,
   handleSlugProdcuts,
   handleUpdateProdcuts,
+  handleUpdateProductForAdmin,
 } from "../controllers/productController.js";
 import { isAdmin, isAuth } from "../utils/isAuth.js";
 
@@ -16,9 +17,13 @@ const productRouter = express.Router();
 
 productRouter.get("/", handleAllProdcuts);
 
-productRouter.delete("/:id",isAuth, isAdmin, handleDeleteForAdmin);
+productRouter.put("/updateproduct", handleUpdateProdcuts);
 
-productRouter.get("/admin",isAuth,isAdmin ,handleAllProdcutsForAdmin);
+productRouter.delete("/:id", isAuth, isAdmin, handleDeleteForAdmin);
+
+productRouter.get("/admin", isAuth, isAdmin, handleAllProdcutsForAdmin);
+
+productRouter.put("/:id", isAuth, isAdmin, handleUpdateProductForAdmin);
 
 productRouter.post("/create",isAuth,isAdmin ,handleCreateProdcutsForAdmin);
 
@@ -28,7 +33,6 @@ productRouter.get("/slug/:slug", handleSlugProdcuts);
 
 productRouter.get("/:id", handleIdProdcuts);
 
-productRouter.put("/updateproduct", handleUpdateProdcuts);
 
 
 

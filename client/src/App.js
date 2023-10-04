@@ -23,6 +23,8 @@ import { getError } from "./utils";
 import axios from "axios";
 import AdminProductList from "./pages/AdminProductList";
 import AdminCreateProduct from "./pages/AdminCreateProduct";
+import AdminUpdateProduct from "./pages/AdminUpdateProduct";
+import AdminListOrders from "./pages/AdminListOrders";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -119,7 +121,23 @@ function App() {
                 path="/admin/products/create"
                 element={
                   <AdminRoutes>
-                    <AdminCreateProduct/>
+                    <AdminCreateProduct />
+                  </AdminRoutes>
+                }
+              />
+              <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoutes>
+                    <AdminUpdateProduct />
+                  </AdminRoutes>
+                }
+              />
+              <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoutes>
+                    <AdminListOrders />
                   </AdminRoutes>
                 }
               />

@@ -48,8 +48,6 @@ export default function PlaceOrderPage() {
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
-      console.log(cart.cartItems[0]._id);
-
       const { data } = await axios.post(
         "/api/orders",
         {

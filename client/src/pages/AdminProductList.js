@@ -118,7 +118,7 @@ export default function AdminProductList() {
               <td>{product.category}</td>
               <td>{product.brand}</td>
               <td>{product.countInStock}</td>
-              <td>{product.createdAt.slice(0,10)}</td>
+              <td>{product.createdAt.slice(0, 10)}</td>
               <td>
                 {" "}
                 <Button
@@ -132,6 +132,17 @@ export default function AdminProductList() {
                 </Button>
               </td>
               <td>
+                {" "}
+                <Button
+                  type="button"
+                  variant="light"
+                  onClick={() => navigate(`/admin/product/${product._id}`)}
+                >
+                  Edit
+                </Button>
+              </td>
+              <td>
+     
                 <Button
                   variant="danger"
                   onClick={() => handleDelete(product._id)}
