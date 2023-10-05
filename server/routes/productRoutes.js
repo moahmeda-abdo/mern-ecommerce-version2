@@ -7,6 +7,7 @@ import {
   handleCreateProdcutsForAdmin,
   handleDeleteForAdmin,
   handleIdProdcuts,
+  handleReviews,
   handleSlugProdcuts,
   handleUpdateProdcuts,
   handleUpdateProductForAdmin,
@@ -18,6 +19,8 @@ const productRouter = express.Router();
 productRouter.get("/", handleAllProdcuts);
 
 productRouter.put("/updateproduct", handleUpdateProdcuts);
+
+productRouter.post("/:id/reviews", isAuth, handleReviews);
 
 productRouter.delete("/:id", isAuth, isAdmin, handleDeleteForAdmin);
 
