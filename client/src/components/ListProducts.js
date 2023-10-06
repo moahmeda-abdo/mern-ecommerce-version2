@@ -42,7 +42,7 @@ export default function ListProducts() {
   }, []);
   return (
     <main>
-      <h1>Featured Products</h1>
+
       {
         <div className="products">
           {loading ? (

@@ -1,7 +1,8 @@
 import React from "react";
 import ListProducts from "../components/ListProducts";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import Swiperr from "../components/Swiperr";
+import CategoryCircle from "../components/CategoryCircle";
 
 export default function HomePage() {
   return (
@@ -9,6 +10,9 @@ export default function HomePage() {
       <Helmet>
         <title>Amazona</title>
       </Helmet>
+      <h1>Featured Products</h1>
+      <Swiperr />
+      <CategoryCircle />
       <ListProducts />
     </div>
   );
