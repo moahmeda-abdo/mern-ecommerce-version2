@@ -55,7 +55,7 @@ export default function OrderHistoryScreen() {
         <title>Order History</title>
       </Helmet>
 
-      <h1>Order History</h1>
+      <h1 className="main-haeding  my-3">Order History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -78,11 +78,11 @@ export default function OrderHistoryScreen() {
                 <td>{order._id}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
+                <td>{order.isPaid ? order.paidAt.substring(0, 10) : "No"}</td>
                 <td>
                   {order.isDelivered
                     ? order.deliveredAt.substring(0, 10)
-                    : 'No'}
+                    : "No"}
                 </td>
                 <td>
                   <Button

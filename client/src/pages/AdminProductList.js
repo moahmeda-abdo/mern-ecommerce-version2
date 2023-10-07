@@ -83,7 +83,7 @@ export default function AdminProductList() {
       <Helmet>
         <title>All products</title>
       </Helmet>
-      <h1>All Products</h1>
+      <h1  className="main-haeding  my-3">All Products</h1>
       <table className="table">
         <thead>
           <tr>
@@ -143,7 +143,6 @@ export default function AdminProductList() {
                 </Button>
               </td>
               <td>
-     
                 <Button
                   variant="danger"
                   onClick={() => handleDelete(product._id)}

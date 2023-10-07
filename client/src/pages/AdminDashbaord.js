@@ -57,7 +57,7 @@ export default function DashboardScreen() {
   return (
     <div>
       <Row>
-        <h1 >Dashboard</h1>
+        <h1  className="main-haeding  my-3">Dashboard</h1>
 
         <div>
           <Link to="/admin/products">

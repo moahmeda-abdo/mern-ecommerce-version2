@@ -134,7 +134,7 @@ export default function ProductPage() {
               <Helmet>
                 <title>{product.name}</title>
               </Helmet>
-              <h1>{product.name}</h1>
+              <h1 >{product.name}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating

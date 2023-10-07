@@ -6,14 +6,12 @@ import { useContext, useEffect } from "react";
 import { Store } from "../pages/Store";
 import { Link } from 'react-router-dom';
 import NavDropdown from "react-bootstrap/NavDropdown";
-import SearchBox from './SearchBox';
-// import { LinkContainer } from "react-router-bootstrap";
+import SearchBox from "./SearchBox";
 
 export default function NavigationBar() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-  
-  
+
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
@@ -23,17 +21,27 @@ export default function NavigationBar() {
 
   return (
     <>
+      <Navbar className="brand-nav">
+        <Container>
+          <Navbar.Brand className="nav-brand" href="/">
+            E-commerce
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Container to="/">
-            <Navbar.Brand href="/">amazona</Navbar.Brand>
-          </Container>
           <Nav className="me-auto">
+            <Nav className="justify-content-center">
               <SearchBox />
-            <Link to="/cart" className="nav-link">
-              Cart
+            </Nav>
+          </Nav>
+          <Nav className="justify-content-center">
+            {" "}
+            {/* Center the content */}
+            <Link to="/cart" className="nav-link cart-link">
+              <i class="fa-solid fa-cart-shopping cart-icon"></i>
               {cart.cartItems.length > 0 && (
-                <Badge pill bg="danger">
+                <Badge className="cart-badge" bg="danger">
                   {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                 </Badge>
               )}
@@ -43,12 +51,9 @@ export default function NavigationBar() {
                 <NavDropdown.Item>
                   <Link to="/profile">User Profile</Link>
                 </NavDropdown.Item>
-
                 <NavDropdown.Item>
-                  {" "}
                   <Link to="/orderhistory">Order History</Link>
                 </NavDropdown.Item>
-
                 <NavDropdown.Divider />
                 <Link className="dropdown-item" onClick={signoutHandler}>
                   Sign Out
@@ -56,10 +61,14 @@ export default function NavigationBar() {
               </NavDropdown>
             ) : (
               <Link className="nav-link" to="/signin">
-                Sign 
+                Sign In
               </Link>
             )}
-            {userInfo && userInfo.isAdmin && (<Link className="nav-link " to='/admin/dashboard'>Dashboard</Link>)}
+            {userInfo && userInfo.isAdmin && (
+              <Link className="nav-link " to="/admin/dashboard">
+                Dashboard
+              </Link>
+            )}
           </Nav>
         </Container>
       </Navbar>

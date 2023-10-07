@@ -8,9 +8,9 @@ export default function HomePage() {
   return (
     <div className="home">
       <Helmet>
-        <title>Amazona</title>
+        <title>E-commerce</title>
       </Helmet>
-      <h1>Featured Products</h1>
+      {/* <h1 className="main-haeding  my-3">Featured Products</h1> */}
       <Swiperr />
       <CategoryCircle />
       <ListProducts />

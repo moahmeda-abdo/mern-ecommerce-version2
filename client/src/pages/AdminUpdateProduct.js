@@ -112,7 +112,7 @@ export default function AdminUpdateProduct() {
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
-      <h1>Edit Product {productId}</h1>
+      <h1  className="main-haeding  my-3">Edit Product {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>

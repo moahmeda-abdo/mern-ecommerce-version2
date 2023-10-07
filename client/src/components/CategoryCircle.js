@@ -19,6 +19,11 @@ export default function CategoryCircle() {
     },
     {
       image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696642793/tgwh3nvhcb5hb8bbvxmi.png",
+      category: "Watches",
+    },
+    {
+      image:
         "https://res.cloudinary.com/drleayhps/image/upload/v1696550615/ouacnbbyy0oezrrek9qu.png",
       category: "Cameras",
     },
@@ -31,6 +36,31 @@ export default function CategoryCircle() {
       image:
         "https://res.cloudinary.com/drleayhps/image/upload/v1696550997/alvmzmydmie2x82tmqgk.png",
       category: "Perfumes",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696643323/z48x1sot61bpvcfo1p2j.png",
+      category: "Bikes",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696643323/cywrjkvvsarvjhlvdihi.png",
+      category: "Tools",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696643323/evbxx2gpnpuouwycspcr.png",
+      category: "Fans",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696643589/pmgiuaaxcrqq3r92aavm.png",
+      category: "Toys",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1696643589/yozci11yclhp6pbmjrzj.png",
+      category: "School",
     },
   ];
 

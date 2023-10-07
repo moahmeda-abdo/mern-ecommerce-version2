@@ -36,7 +36,7 @@ export default function PaymentPage() {
       <Helmet>
         <title>Payment Method</title>
       </Helmet>
-      <h1 className="my-3">Payment Method</h1>
+      <h1 className="main-haeding  my-3">Payment Method</h1>
       <Form onSubmit={submitHandler}>
         <div className="mb-3">
           <Form.Check

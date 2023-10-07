@@ -53,7 +53,7 @@ export default function SignUpPage() {
         <Helmet>
           <title>Sign Up</title>
         </Helmet>
-        <h1 className="my-3">Sign UP</h1>
+        <h1 className="main-haeding  my-3">Sign UP</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3">
             <Form.Label>Full Name</Form.Label>
@@ -95,7 +95,9 @@ export default function SignUpPage() {
         </Form>
         <div className="mb-3">
           Already have an account?{" "}
-          <Link to={`/signin?redirect=${redirect}`} className="text-primary ">Sign-In</Link>
+          <Link to={`/signin?redirect=${redirect}`} className="text-primary ">
+            Sign-In
+          </Link>
         </div>
       </Container>
     </>

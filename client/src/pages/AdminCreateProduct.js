@@ -95,7 +95,7 @@ export default function AdminCreateProduct() {
       <Helmet>
         <title>Create products</title>
       </Helmet>
-      <h1>Create Product</h1>
+      <h1  className="main-haeding  my-3">Create Product</h1>
 
       <div></div>
       <div>
@@ -125,7 +125,6 @@ export default function AdminCreateProduct() {
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label>Brand</Form.Label>
               <Form.Control
-
                 required
                 type="text"
                 placeholder="Brand"

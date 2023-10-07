@@ -82,7 +82,7 @@ export default function AdminListUsers() {
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <h1>Users ({users.length})</h1>
+      <h1  className="main-haeding  my-3">Users </h1>  
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

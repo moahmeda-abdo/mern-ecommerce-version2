@@ -99,7 +99,7 @@ export default function PlaceOrderPage() {
         <title>Order Deatails</title>
       </Helmet>
 
-      <h1 className="my-3">Order Deatails</h1>
+      <h1 className="main-haeding  my-3">Order Deatails</h1>
 
       <Row>
         <Col md={8}>

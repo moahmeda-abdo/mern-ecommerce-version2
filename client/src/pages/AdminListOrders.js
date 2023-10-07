@@ -56,7 +56,7 @@ export default function AdminListOrders() {
       <Helmet>
         <title>Orders</title>
       </Helmet>
-      <h1>Orders</h1>
+      <h1  className="main-haeding  my-3">Orders</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

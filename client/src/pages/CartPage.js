@@ -50,7 +50,7 @@ export default function CartPage() {
         <title>Shopping Cart</title>
       </Helmet>
 
-      <h1>Shopping Cart</h1>
+      <h1 className="main-haeding  my-3">Shopping Cart</h1>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
@@ -67,8 +67,8 @@ export default function CartPage() {
                         src={item.image}
                         alt={item.name}
                         className="img-fluid rounded img-thumbnail"
-                      ></img>{" "}
-                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                      ></img>
+                      <Link className="m-3" to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
                       <Button variant="light" disabled={item.quantity === 1}>
