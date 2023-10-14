@@ -25,10 +25,7 @@ main {
   padding: 1rem;
   flex: 1;
 }
-.site-container {
-  min-height: 100vh;
-  transition: .4s;
-}
+
 .products {
   display: flex;
   flex-wrap: wrap;
@@ -51,7 +48,7 @@ main {
 
 .btn-primary {
   background-color: #ffc800;
-    color: #ffffff;
+    color: #000000;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -204,7 +201,7 @@ text-align: center;
   color: #333;
   text-align: center;
 
-  margin: 20px 0;
+  margin: 20px auto;
 
   padding: 10px;
 
@@ -273,4 +270,50 @@ background-color: #ffc800;
 
   align-items: center ;
   width:450px;
+}
+.footer {
+  background-color: rgb(25, 24, 24);
+  padding-top: 20px;
+  /* Add some top padding for better spacing */
+
+}
+
+.footer a.text-reset {
+  color: white;
+}
+
+
+
+.footer h6,
+.footer p {
+  color: white;
+}
+
+.footer section {
+
+  color: #ffffff;
+}
+
+.logo-footer {
+  max-width: 150px;
+  height: auto;
+}
+
+.copyright {
+  color: #ffffff;
+}
+
+.footer div i:hover {
+  color: #ffc800;
+  transition: .3s;
+}
+
+
+.footer-link:hover {
+
+  color: #ffc800;
+  transition: .3s;
+}
+.site-container{
+min-height: 100vh;
 }

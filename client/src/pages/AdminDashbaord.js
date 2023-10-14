@@ -57,11 +57,11 @@ export default function DashboardScreen() {
   return (
     <div>
       <Row>
-        <h1  className="main-haeding  my-3">Dashboard</h1>
+        <h1 className="main-haeding  my-3">Dashboard</h1>
 
-        <div>
+        <div className="my-2">
           <Link to="/admin/products">
-            <Button className="m-2">Manage Products</Button>
+            <Button className="me-2">Manage Products</Button>
           </Link>
           <Link to="/admin/products/create">
             <Button className="m-2">Create Products</Button>

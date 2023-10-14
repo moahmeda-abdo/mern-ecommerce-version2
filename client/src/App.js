@@ -26,6 +26,7 @@ import AdminCreateProduct from "./pages/AdminCreateProduct";
 import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminListOrders from "./pages/AdminListOrders";
 import AdminListUsers from "./pages/AdminListUsers";
+import Footer from "./components/Footer";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,84 +75,87 @@ function App() {
           </div>
         </div>
         <div className={isOpen ? "active-container" : "normal-container"}>
-          <Container>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/products/:slug" element={<ProductPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/signin" element={<SignInPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/shipping" element={<ShippingAddresspage />} />
-              <Route path="/payment" element={<PaymentPage />} />
-              <Route path="/placeorder" element={<PlaceOrderPage />} />
-              <Route path="/order/:id" element={<OrderPage />} />
-              <Route
-                path="/orderhistory"
-                element={
-                  <ProtectedRoutes>
-                    <OrderHistory />
-                  </ProtectedRoutes>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoutes>
-                    <UserProfile />
-                  </ProtectedRoutes>
-                }
-              />
-              {/* ********admin routes******* */}
-              <Route
-                path="/admin/dashboard"
-                element={
-                  <AdminRoutes>
-                    <AdminDashbaord />
-                  </AdminRoutes>
-                }
-              />
-              <Route
-                path="/admin/products"
-                element={
-                  <AdminRoutes>
-                    <AdminProductList />
-                  </AdminRoutes>
-                }
-              />
-              <Route
-                path="/admin/products/create"
-                element={
-                  <AdminRoutes>
-                    <AdminCreateProduct />
-                  </AdminRoutes>
-                }
-              />
-              <Route
-                path="/admin/product/:id"
-                element={
-                  <AdminRoutes>
-                    <AdminUpdateProduct />
-                  </AdminRoutes>
-                }
-              />
-              <Route
-                path="/admin/orders"
-                element={
-                  <AdminRoutes>
-                    <AdminListOrders />
-                  </AdminRoutes>
-                }
-              />
-              <Route
-                path="/admin/users"
-                element={
-                  <AdminRoutes>
-                    <AdminListUsers />
-                  </AdminRoutes>
-                }
-              />
-            </Routes>
-          </Container>
+          <div className="d-flex flex-column site-container">
+            <Container>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/products/:slug" element={<ProductPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/signin" element={<SignInPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/shipping" element={<ShippingAddresspage />} />
+                <Route path="/payment" element={<PaymentPage />} />
+                <Route path="/placeorder" element={<PlaceOrderPage />} />
+                <Route path="/order/:id" element={<OrderPage />} />
+                <Route
+                  path="/orderhistory"
+                  element={
+                    <ProtectedRoutes>
+                      <OrderHistory />
+                    </ProtectedRoutes>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoutes>
+                      <UserProfile />
+                    </ProtectedRoutes>
+                  }
+                />
+                {/* ********admin routes******* */}
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <AdminRoutes>
+                      <AdminDashbaord />
+                    </AdminRoutes>
+                  }
+                />
+                <Route
+                  path="/admin/products"
+                  element={
+                    <AdminRoutes>
+                      <AdminProductList />
+                    </AdminRoutes>
+                  }
+                />
+                <Route
+                  path="/admin/products/create"
+                  element={
+                    <AdminRoutes>
+                      <AdminCreateProduct />
+                    </AdminRoutes>
+                  }
+                />
+                <Route
+                  path="/admin/product/:id"
+                  element={
+                    <AdminRoutes>
+                      <AdminUpdateProduct />
+                    </AdminRoutes>
+                  }
+                />
+                <Route
+                  path="/admin/orders"
+                  element={
+                    <AdminRoutes>
+                      <AdminListOrders />
+                    </AdminRoutes>
+                  }
+                />
+                <Route
+                  path="/admin/users"
+                  element={
+                    <AdminRoutes>
+                      <AdminListUsers />
+                    </AdminRoutes>
+                  }
+                />
+              </Routes>
+            </Container>
+          </div>
+          <Footer />
         </div>
       </BrowserRouter>
     </>

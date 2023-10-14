@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 export default function AdminCreateProduct() {
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error, res }, dispatach] = useReducer(reducer, {
+  const [{ loading, error, response }, dispatach] = useReducer(reducer, {
     loading: false,
     error: "",
     response: "",
