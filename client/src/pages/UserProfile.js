@@ -26,7 +26,7 @@ export default function UserProfile() {
           <Col md={6}>
             <Card>
               <Card.Header>
-                <h1  className="main-haeding  mb-0">User Profile</h1>
+                <h1  className="  mb-0">User Profile</h1>
               </Card.Header>
               <Card.Body>
                 <Form.Group>

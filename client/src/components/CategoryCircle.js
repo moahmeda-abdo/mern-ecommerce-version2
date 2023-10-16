@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CategoryCircle() {
   const categoriess = [
@@ -67,14 +68,19 @@ export default function CategoryCircle() {
   return (
     <div className="category-flex">
       {categoriess.map((category, index) => (
-        <div key={index} className="circle-container">
-          <img
-            className="circleStyle"
-            src={category.image}
-            alt={category.category}
-          ></img>
-          <div>{category.category}</div>
-        </div>
+        <Link
+          className="circle-link"
+          to={`/category/?query=${category.category}`}
+        >
+          <div key={index} className="circle-container">
+            <img
+              className="circleStyle"
+              src={category.image}
+              alt={category.category}
+            ></img>
+            <div>{category.category}</div>
+          </div>
+        </Link>
       ))}
     </div>
   );

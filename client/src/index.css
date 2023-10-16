@@ -317,3 +317,20 @@ background-color: #ffc800;
 .site-container{
 min-height: 100vh;
 }
+.search {
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+
+
+}
+.circle-link{
+text-decoration: none;
+color: #000;
+}
+.sidebar-link{
+text-decoration: none;
+color: #ffc800;
+margin: 50px 20px;
+}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import Container from "react-bootstrap/esm/Container";
@@ -27,6 +27,8 @@ import AdminUpdateProduct from "./pages/AdminUpdateProduct";
 import AdminListOrders from "./pages/AdminListOrders";
 import AdminListUsers from "./pages/AdminListUsers";
 import Footer from "./components/Footer";
+import SearchPage from "./pages/SearchPage";
+import CategoryPage from "./pages/CategoryPage";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,15 +56,18 @@ function App() {
           {" "}
           <div>
             {" "}
-            <Nav className="flex-column text-white w-100 p-2">
+            <Nav className="flex-column text-white w-100 p-">
               <Nav.Item>
                 <strong>Categories</strong>
               </Nav.Item>
               {categories.map((category) => (
                 <Nav.Item key={category}>
-                  <>
-                    <Nav.Link>{category}</Nav.Link>
-                  </>
+                  <Link
+                    className="sidebar-link"
+                    to={`/category/?query=${category}`}
+                  >
+                    {category}
+                  </Link>
                 </Nav.Item>
               ))}
             </Nav>
@@ -87,6 +92,8 @@ function App() {
                 <Route path="/payment" element={<PaymentPage />} />
                 <Route path="/placeorder" element={<PlaceOrderPage />} />
                 <Route path="/order/:id" element={<OrderPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/category" element={<CategoryPage />} />
                 <Route
                   path="/orderhistory"
                   element={

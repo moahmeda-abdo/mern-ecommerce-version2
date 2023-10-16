@@ -148,6 +148,62 @@ const handleReviews = expressAsyncHandler(async (req, res) => {
   }
 });
 
+const handleSearchProdcuts = expressAsyncHandler(async (req, res) => {
+  const pageSize = 10;
+  const { query } = req;
+  const searchQuery = query.query;
+  const page = query.page || 1;
+
+  const queryFilter = searchQuery
+    ? { name: { $regex: searchQuery, $options: "i" } }
+    : {};
+
+  const products = await Product.find({
+    ...queryFilter,
+  })
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  const countProducts = await Product.countDocuments({
+    ...queryFilter,
+  });
+
+  res.send({
+    products,
+    countProducts,
+    page,
+    pages: Math.ceil(countProducts / pageSize),
+  });
+});
+
+const handleCategoryProdcuts = expressAsyncHandler(async (req, res) => {
+  const pageSize = 10;
+  const { query } = req;
+  const searchQuery = query.query;
+  const page = query.page || 1;
+
+  const queryFilter = searchQuery
+    ? { category: { $regex: searchQuery, $options: "i" } }
+    : {};
+
+  const products = await Product.find({
+    ...queryFilter,
+  })
+    .skip(pageSize * (page - 1))
+    .limit(pageSize);
+
+  const countProducts = await Product.countDocuments({
+    ...queryFilter,
+  });
+
+  res.send({
+    products,
+    countProducts,
+    page,
+    pages: Math.ceil(countProducts / pageSize),
+  });
+});
+
 export {
   handleReviews,
   handleAllProdcuts,
@@ -159,4 +215,6 @@ export {
   handleDeleteForAdmin,
   handleCreateProdcutsForAdmin,
   handleUpdateProductForAdmin,
+  handleSearchProdcuts,
+  handleCategoryProdcuts,
 };

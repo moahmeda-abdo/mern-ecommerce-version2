@@ -11,10 +11,16 @@ import {
   handleSlugProdcuts,
   handleUpdateProdcuts,
   handleUpdateProductForAdmin,
+  handleSearchProdcuts,
+  handleCategoryProdcuts,
 } from "../controllers/productController.js";
 import { isAdmin, isAuth } from "../utils/isAuth.js";
 
 const productRouter = express.Router();
+
+productRouter.get("/category", handleCategoryProdcuts);
+
+productRouter.get("/search", handleSearchProdcuts);
 
 productRouter.get("/", handleAllProdcuts);
 
