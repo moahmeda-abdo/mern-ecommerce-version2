@@ -176,13 +176,11 @@ text-align: center;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-
 }
 
 .circle-container {
   text-align: center;
-  margin: 25px;
-
+  margin: 10px;
 }
 
 .circleStyle {
@@ -190,7 +188,29 @@ text-align: center;
   height: 150px;
   border-radius: 50%;
   border: 2px solid #dedcdc;
+}
 
+@media (max-width: 576px) {
+  .category-flex {
+    justify-content: center;
+  }
+
+  .circle-container {
+    margin: 10px;
+  }
+
+  .circleStyle {
+    width: 100px;
+
+    height: 100px;
+
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .category-flex {
+    justify-content: space-between;
+  }
 }
 .main-haeding {
 
@@ -333,4 +353,125 @@ color: #000;
 text-decoration: none;
 color: #ffc800;
 margin: 50px 20px;
+}
+/* Default styles */
+.mySwiper {
+  width: 100%;
+  height: 200px;
+}
+
+
+@media (min-width: 576px) {
+  .mySwiper {
+    height: 270px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mySwiper {
+    height: 200px;
+  }
+}
+
+@media (min-width: 992px) {
+  .mySwiper {
+    height: 270;
+    width: 1270px;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .mySwiper {
+    height: 270px;
+    width: 1270px;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-brand {
+    font-size: 1rem;
+
+  }
+
+  .cart-link {
+    margin-right: 10px;
+
+  }
+
+  .dropdown-item {
+    display: block;
+
+  }
+
+  .navbar {
+    padding: 0;
+
+  }
+}
+
+@media (min-width: 576px) {
+  .nav-brand {
+    font-size: 2rem;
+
+  }
+}
+
+.searchbox {
+  width: 100%;
+  max-width: 300px;
+}
+
+.searchbox .input-group {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.searchbox .form-control {
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+
+.searchbox .btn {
+  height: 30px;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .searchbox {
+    max-width: 200px;
+  }
+
+  .searchbox .form-control {
+    height: 24px;
+    font-size: 12px;
+  }
+
+  .searchbox .btn {
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .searchbox {
+    max-width: 300px;
+  }
+
+  .searchbox .form-control {
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .searchbox .btn {
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+.price {
+  
+  font-weight: bold;
 }

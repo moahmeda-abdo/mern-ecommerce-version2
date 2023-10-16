@@ -1,65 +1,69 @@
-import { useEffect, useReducer } from "react";
+// Frontend code
+import { useEffect, useState } from "react";
 import axios from "axios";
-import logger from "use-reducer-logger";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ProductCard from '../components/ProductCard';
-import LoadingBox from "../components/LoadingBox";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import ProductCard from "../components/ProductCard";
 import MessageBox from "../components/MessageBox";
 
 export default function ListProducts() {
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "FETCH_REQUEST":
-        return { ...state, loading: true };
-      case "FETCH_SUCCESS":
-        return { ...state, loading: false, products: action.payload };
-      case "FETCH_FAIL":
-        return { ...state, loading: false, error: action.payload };
-      default:
-        return state;
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const fetchProducts = async () => {
+    try {
+      const result = await axios.get(
+        `http://localhost:5000/api/products?page=${page}&pageSize=${pageSize}`
+      );
+      setProducts((prevProducts) => [...prevProducts, ...result.data.products]);
+    } catch (error) {
+      setError(error.message);
     }
   };
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
-    products: [],
-    loading: true,
-    error: "",
-  });
 
-  // const [products, setProducts] = useState([]);
+  const handleScroll = () => {
+    // if (
+    //   window.innerHeight + document.documentElement.scrollTop + 10 >=
+    //   document.documentElement.offsetHeight
+    // ) {
+    //   setPage(page + 1); // Load more products when scrolling near the bottom
+    // }
+    if (
+      document.documentElement.scrollHeight -
+        window.innerHeight -
+        document.documentElement.scrollTop <=
+      600
+    ) {
+      setPage(page + 1); // Load more products when scrolling is within 600 pixels from the bottom
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
+    fetchProducts();
+  }, [page, pageSize]);
 
-      try {
-        const result = await axios.get("http://localhost:5000/api/products");
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
-      } catch (error) {
-        dispatch({ type: "FETCH_FAIL", payload: error.message });
-      }
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
-    fetchData();
-  }, []);
+  }, [page]);
+
   return (
     <main>
-
-      {
-        <div className="products">
-          {loading ? (
-            <LoadingBox />
-          ) : error ? (
-            <MessageBox variant="danger">{error}</MessageBox>
-          ) : (
-            <Row>
-              {products.map((product) => (
-                <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                  <ProductCard product={product}></ProductCard>
-                </Col>
-              ))}
-            </Row>
-          )}
-        </div>
-      }
+      <div className="products">
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <Row>
+          {products.map((product) => (
+            <Col key={product._id} sm={6} md={4} lg={3} className="mb-3">
+              <ProductCard product={product}></ProductCard>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </main>
   );
 }

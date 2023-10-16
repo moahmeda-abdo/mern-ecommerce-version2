@@ -25,8 +25,8 @@ export default function Swiperr() {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+    
+        modules={[Autoplay, Pagination]}
         className="mySwiper"
       >
         <SwiperSlide>

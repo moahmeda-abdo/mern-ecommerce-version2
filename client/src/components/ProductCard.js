@@ -35,7 +35,7 @@ function ProductCard(props) {
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text className='price'>${product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="danger" disabled>
             Out of stock

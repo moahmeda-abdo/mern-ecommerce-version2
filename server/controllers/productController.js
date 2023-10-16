@@ -2,9 +2,26 @@ import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 
 const handleAllProdcuts = expressAsyncHandler(async (req, res) => {
-  const products = await Product.find();
-  res.send(products);
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 3;
+
+  try {
+    const products = await Product.find()
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    const totalProducts = await Product.countDocuments();
+
+    res.json({
+      products,
+      page,
+      pages: Math.ceil(totalProducts / pageSize),
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
+
 
 const handleSlugProdcuts = expressAsyncHandler(async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });

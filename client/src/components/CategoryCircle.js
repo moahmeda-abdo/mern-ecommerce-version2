@@ -63,6 +63,16 @@ export default function CategoryCircle() {
         "https://res.cloudinary.com/drleayhps/image/upload/v1696643589/yozci11yclhp6pbmjrzj.png",
       category: "School",
     },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1697472766/fki6mtgs2cjk8j7fz3jv.png",
+      category: "Makeup",
+    },
+    {
+      image:
+        "https://res.cloudinary.com/drleayhps/image/upload/v1697473008/p8ztz1nma9aqmjr121vu.png",
+      category: "Home",
+    },
   ];
 
   return (
