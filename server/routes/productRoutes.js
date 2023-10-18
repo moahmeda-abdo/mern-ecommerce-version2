@@ -14,7 +14,7 @@ import {
   handleSearchProdcuts,
   handleCategoryProdcuts,
 } from "../controllers/productController.js";
-import { isAdmin, isAuth } from "../utils/isAuth.js";
+import { isAdmin, isAuth, isViewer } from "../utils/isAuth.js";
 
 const productRouter = express.Router();
 
@@ -30,7 +30,7 @@ productRouter.post("/:id/reviews", isAuth, handleReviews);
 
 productRouter.delete("/:id", isAuth, isAdmin, handleDeleteForAdmin);
 
-productRouter.get("/admin", isAuth, isAdmin, handleAllProdcutsForAdmin);
+productRouter.get("/admin", isAuth, isViewer, handleAllProdcutsForAdmin);
 
 productRouter.put("/:id", isAuth, isAdmin, handleUpdateProductForAdmin);
 

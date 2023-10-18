@@ -6,25 +6,23 @@ import { generateToken } from "../utils/generateToken.js";
 
 
 const handleSignin = expressAsyncHandler(async (req, res) => {
-
   const user = await User.findOne({ email: req.body.email });
-  
+
   if (user) {
     const isMatched = await bcrypt.compareSync(
       req.body.password,
       user.password
     );
-    
+
     if (isMatched) {
       res.send({
-        _id: user._id,
         _id: user._id,
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        isViewer: user.isViewer,
         token: generateToken(user),
       });
-      
     } else {
       res.status(401).send({ message: "Invalid email or password" });
     }
@@ -32,7 +30,6 @@ const handleSignin = expressAsyncHandler(async (req, res) => {
     res.status(401).send({ message: "Invalid email or password" });
   }
 });
-
 
 const handleSignUp = expressAsyncHandler(async (req, res) => {
   const isExsit = await User.findOne({ email: req.body.email });
@@ -43,6 +40,8 @@ const handleSignUp = expressAsyncHandler(async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
+      isAdmin: false,  
+      isViewer: false, 
     });
     const user = await newUser.save();
     res.send({
@@ -50,6 +49,7 @@ const handleSignUp = expressAsyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isViewer: user.isViewer,
       token: generateToken(user),
     });
   }

@@ -9,6 +9,7 @@ export const isAuth = (req, res, next) => {
         res.status(401).send({ message: "Invalid Token" });
       } else {
         req.user = decode;
+        console.log(decode)
         next();
       }
     });
@@ -25,3 +26,12 @@ export const isAdmin = (req, res, next) => {
     res.status(401).send({ message: "invalid admin token" });
   }
 };
+export const isViewer = (req, res, next) => {
+  if (req.user && (req.user.isAdmin || req.user.isViewer)) {
+  console.log(req.user)
+    next();
+  } else {
+    res.status(401).send({ message: "invalid admin token" });
+  }
+};
+
