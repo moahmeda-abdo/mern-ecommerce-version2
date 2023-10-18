@@ -3,7 +3,7 @@ import Product from "../models/productModel.js";
 
 const handleAllProdcuts = expressAsyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.pageSize) || 3;
+  const pageSize = parseInt(req.query.pageSize) || 20;
 
   try {
     const products = await Product.find()

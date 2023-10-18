@@ -8,7 +8,7 @@ import MessageBox from "../components/MessageBox";
 
 export default function ListProducts() {
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(25);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,9 +35,9 @@ export default function ListProducts() {
       document.documentElement.scrollHeight -
         window.innerHeight -
         document.documentElement.scrollTop <=
-      600
+      700
     ) {
-      setPage(page + 1); // Load more products when scrolling is within 600 pixels from the bottom
+      setPage(page + 1);
     }
   };
 

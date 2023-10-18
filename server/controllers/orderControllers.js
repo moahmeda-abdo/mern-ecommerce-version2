@@ -92,9 +92,27 @@ const handleSummary = expressAsyncHandler(async (req, res) => {
 
 
 const handleOrdersForAdmin = expressAsyncHandler(async (req, res) => {
-  const orders = await Order.find().populate("user", "name");
-  res.send(orders);
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 20;
+
+  try {
+    const orders = await Order.find()
+      .populate("user", "name")
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    const totalOrders = await Order.countDocuments();
+
+    res.json({
+      orders,
+      page,
+      pages: Math.ceil(totalOrders / pageSize),
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 });
+
 export {
   handleOrders,
   handleIdOrders,
