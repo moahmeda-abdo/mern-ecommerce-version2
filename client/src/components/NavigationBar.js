@@ -64,7 +64,7 @@ export default function NavigationBar() {
                 Sign In
               </Link>
             )}
-            {userInfo && userInfo.isAdmin && (
+            {userInfo && (userInfo.isAdmin || userInfo.isViewer)&& (
               <Link className="nav-link " to="/admin/dashboard">
                 Dashboard
               </Link>
