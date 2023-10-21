@@ -80,7 +80,7 @@ export default function AdminCreateProduct() {
       );
       return response.data.secure_url;
     } catch (error) {
-      console.log(error);
+      getError(error);
     }
   };
 

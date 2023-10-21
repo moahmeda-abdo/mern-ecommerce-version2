@@ -47,7 +47,7 @@ export default function AdminListOrders() {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
-      console.log(data.orders);
+
       setOrders((prevOrders) => [...prevOrders, ...data.orders]); 
     } catch (err) {
       // dispatch({

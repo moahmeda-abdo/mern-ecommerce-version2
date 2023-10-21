@@ -51,7 +51,6 @@ export default function AdminListUsers() {
           autoClose: 3000,
         });
       } catch (error) {
-      console.log(error)
         toast.error(error, {
           position: "bottom-center",
           autoClose: 3000,

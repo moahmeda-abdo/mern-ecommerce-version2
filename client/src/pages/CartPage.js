@@ -29,11 +29,11 @@ export default function CartPage() {
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
-    console.log("m");
+
   };
   const removeItemHandler = (item) => {
     ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
-    console.log("F");
+
   };
 
   const checkoutHandler = () => {

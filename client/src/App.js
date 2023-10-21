@@ -42,7 +42,7 @@ function App() {
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));
-        console.log(err);
+getError(err)
       }
     };
     fetchCategories();

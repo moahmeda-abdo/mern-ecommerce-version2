@@ -43,7 +43,7 @@ export default function DashboardScreen() {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });
-        console.log(data);
+
       } catch (err) {
         dispatch({
           type: "FETCH_FAIL",
