@@ -13,15 +13,14 @@ import { getError } from "../utils";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 
-
 export default function PlaceOrderPage() {
-
-
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // Helper function for rounding
+
+  // Calculate order prices
   cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
@@ -41,6 +40,7 @@ export default function PlaceOrderPage() {
         return state;
     }
   };
+
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
@@ -48,6 +48,8 @@ export default function PlaceOrderPage() {
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
+
+      // Create a new order
       const { data } = await axios.post(
         "/api/orders",
         {
@@ -67,15 +69,20 @@ export default function PlaceOrderPage() {
       );
 
       const productData = [];
+      // Prepare product data for updating stock
       cart.cartItems.forEach((item) => {
         productData.push({
           productId: item._id,
           quantity: item.quantity,
         });
       });
+
+      // Update product stock
       const { updateproduct } = await axios.put("/api/products/updateproduct", {
         products: productData,
       });
+
+      // Clear the cart and navigate to the order details page
       ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREATE_SUCCESS" });
       localStorage.removeItem("cartItems");
@@ -87,6 +94,7 @@ export default function PlaceOrderPage() {
   };
 
   useEffect(() => {
+    // Redirect to the payment page if payment method is not selected
     if (!cart.paymentMethod) {
       navigate("/payment");
     }
@@ -96,10 +104,10 @@ export default function PlaceOrderPage() {
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
-        <title>Order Deatails</title>
+        <title>Order Details</title>
       </Helmet>
 
-      <h1 className="main-haeding  my-3">Order Deatails</h1>
+      <h1 className="main-heading my-3">Order Details</h1>
 
       <Row>
         <Col md={8}>
@@ -115,7 +123,7 @@ export default function PlaceOrderPage() {
                 {cart.shippingAddress.country}
                 <br />
                 <strong>Phone Number: </strong>{" "}
-                {cart.shippingAddress.phoneNumber},
+                {cart.shippingAddress.phoneNumber}
               </Card.Text>
               <Link className="text-primary" to="/shipping">
                 Edit
@@ -198,7 +206,7 @@ export default function PlaceOrderPage() {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong> Order Total</strong>
+                      <strong>Order Total</strong>
                     </Col>
                     <Col>
                       <strong>${cart.totalPrice.toFixed(2)}</strong>

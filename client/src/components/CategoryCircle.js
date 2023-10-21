@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function CategoryCircle() {
+  // An array containing objects, each representing a category with an image and category name
   const categoriess = [
     {
       image:

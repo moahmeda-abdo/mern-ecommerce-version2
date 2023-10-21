@@ -1,4 +1,3 @@
-// Frontend code
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
@@ -13,31 +12,29 @@ export default function ListProducts() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Function to fetch products from the server
   const fetchProducts = async () => {
     try {
       const result = await axios.get(
         `http://localhost:5000/api/products?page=${page}&pageSize=${pageSize}`
       );
 
+      // Filter out products that are already in the 'products' array
       const newProducts = result.data.products.filter((product) => {
-        // Check if the product doesn't already exist in the products array
         return !products.some(
           (existingProduct) => existingProduct._id === product._id
         );
       });
 
+      // Update 'products' state with the new products
       setProducts((prevProducts) => [...prevProducts, ...newProducts]);
     } catch (error) {
       setError(error.message);
     }
   };
+
+  // Function to handle scrolling and trigger more product loading
   const handleScroll = () => {
-    // if (
-    //   window.innerHeight + document.documentElement.scrollTop + 10 >=
-    //   document.documentElement.offsetHeight
-    // ) {
-    //   setPage(page + 1); // Load more products when scrolling near the bottom
-    // }
     if (
       document.documentElement.scrollHeight -
         window.innerHeight -
@@ -48,10 +45,12 @@ export default function ListProducts() {
     }
   };
 
+  // Fetch products when the component mounts and when page or page size changes
   useEffect(() => {
     fetchProducts();
   }, [page, pageSize]);
 
+  // Add and remove scroll event listener
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {

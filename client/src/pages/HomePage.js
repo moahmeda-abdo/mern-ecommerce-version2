@@ -10,7 +10,6 @@ export default function HomePage() {
       <Helmet>
         <title>E-commerce</title>
       </Helmet>
-      {/* <h1 className="main-haeding  my-3">Featured Products</h1> */}
       <Swiperr />
       <CategoryCircle />
       <ListProducts />

@@ -20,12 +20,13 @@ const reducer = (state, action) => {
       };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-
     default:
       return state;
   }
 };
+
 export default function AdminListUsers() {
+  // Use a reducer to manage state changes
   const [{ loading, error, users }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
@@ -34,23 +35,27 @@ export default function AdminListUsers() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  // Function to handle user deletion
   const handleDelete = async (userId) => {
     const confirmed = window.confirm(
-      "Are you sure you want to delete this product?"
+      "Are you sure you want to delete this user?"
     );
     if (confirmed) {
       try {
+        // Send a request to delete the user
         const { response } = await axios.delete(`/api/users/${userId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         setTimeout(function () {
           window.location.reload();
         }, 3000);
+        // Show a success toast message
         toast.success("User deleted successfully", {
           position: "bottom-center",
           autoClose: 3000,
         });
       } catch (error) {
+        // Show an error toast message if there's an issue
         toast.error(error, {
           position: "bottom-center",
           autoClose: 3000,
@@ -60,6 +65,7 @@ export default function AdminListUsers() {
   };
 
   useEffect(() => {
+    // Fetch user data when the component mounts
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -76,12 +82,13 @@ export default function AdminListUsers() {
     };
     fetchData();
   }, [userInfo]);
+
   return (
     <div>
       <Helmet>
         <title>Users</title>
       </Helmet>
-      <h1  className="main-haeding  my-3">Users </h1>  
+      <h1 className="main-haeding my-3">Users</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -105,7 +112,6 @@ export default function AdminListUsers() {
                 <td>{user.email}</td>
                 <td>{user.isAdmin ? "YES" : "NO"}</td>
                 <td>
-                  {" "}
                   <Button
                     variant="danger"
                     onClick={() => handleDelete(user._id)}

@@ -10,6 +10,7 @@ import { getError } from "../utils";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 
+// Reducer function to handle state changes
 const reducer = (state, action) => {
   switch (action.type) {
     case "CREATE_REQUEST":
@@ -23,15 +24,19 @@ const reducer = (state, action) => {
   }
 };
 
+// Functional component to create a new product
 export default function AdminCreateProduct() {
   const { state } = useContext(Store);
   const { userInfo } = state;
+
+  // Use reducer to manage loading, error, and response states
   const [{ loading, error, response }, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
     response: "",
   });
 
+  // State variables for form input fields
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [price, setPrice] = useState(0);
@@ -40,12 +45,16 @@ export default function AdminCreateProduct() {
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  
+
+  // Event handler for form submission
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch({ type: "CREATE_REQUEST" });
+
+    // Upload the selected image to the cloud
     const imageUrl = await uploadToCloud(image);
 
+    // Prepare product data to be sent to the server
     const productData = {
       name,
       slug,
@@ -58,21 +67,26 @@ export default function AdminCreateProduct() {
     };
 
     try {
+      // Send a POST request to create a new product
       const response = axios.post("/api/products/create", productData, {
         headers: { authorization: `Bearer ${userInfo.token}` },
       });
       dispatch({ type: "CREATE_SUCCESS", payload: response });
 
+      // Display a success message
       toast.success("Product created successfully!");
     } catch (error) {
+      // Handle and display any errors
       dispatch({ type: "CREATE_FAIL", payload: getError(error) });
     }
   };
 
+  // Upload the selected image to a cloud storage service (in this case, Cloudinary)
   const uploadToCloud = async (file) => {
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", "rnl3hvsh");
+
     try {
       const response = await axios.post(
         "https://api.cloudinary.com/v1_1/drleayhps/image/upload",
@@ -80,6 +94,7 @@ export default function AdminCreateProduct() {
       );
       return response.data.secure_url;
     } catch (error) {
+      // Handle and display any cloud upload errors
       getError(error);
     }
   };

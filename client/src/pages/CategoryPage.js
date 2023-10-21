@@ -8,6 +8,7 @@ import MessageBox from "../components/MessageBox";
 import LoadingBox from "../components/LoadingBox";
 import { Helmet } from "react-helmet-async";
 
+// Define a reducer function to manage component state based on actions
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -28,13 +29,17 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export default function CategoryPage() {
+  // Get the current URL query parameters using the `useLocation` hook
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
 
+  // Extract query and page values from the URL query parameters
   const query = sp.get("query");
   const page = sp.get("page") || 1;
 
+  // Initialize component state using the reducer
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -42,14 +47,16 @@ export default function CategoryPage() {
     });
 
   useEffect(() => {
-
+    // Fetch and load data when the component mounts or when query or page changes
     const fetchData = async () => {
       try {
+        // Fetch products based on the category and page from the API
         const { data } = await axios.get(
           `/api/products/category?page=${page}&query=${query}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
+        // Handle fetch error
         dispatch({
           type: "FETCH_FAIL",
           payload: getError(error),
@@ -59,22 +66,25 @@ export default function CategoryPage() {
     fetchData();
   }, [error, page, query]);
 
+  // Function to generate the URL for filtering products
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page;
     const filterQuery = filter.query || query;
     return `/category?query=${filterQuery}&page=${filterPage}`;
   };
+
   return (
     <div>
-      {" "}
       <Container className="search">
         <Helmet>
           <title>Search Products</title>
         </Helmet>
         <Col md={9}>
           {loading ? (
+            // Display a loading spinner while fetching data
             <LoadingBox></LoadingBox>
           ) : error ? (
+            // Display an error message if data fetching fails
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
@@ -87,10 +97,12 @@ export default function CategoryPage() {
                 </Col>
               </Row>
               {products.length === 0 ? (
+                // Display a message if no products are found
                 <MessageBox>No Product Found</MessageBox>
               ) : (
                 <Row>
                   {products.map((product) => (
+                    // Display product cards for each product found
                     <Col
                       key={product.slug}
                       sm={6}
@@ -104,6 +116,7 @@ export default function CategoryPage() {
                 </Row>
               )}
               <div>
+                {/* Create pagination buttons for navigating through pages */}
                 {[...Array(pages).keys()].map((x) => (
                   <Link
                     key={x + 1}

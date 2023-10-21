@@ -12,6 +12,7 @@ import { Store } from "./Store";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Reducer function to handle state changes
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -28,14 +29,18 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+// Component for the dashboard screen
 export default function DashboardScreen() {
+  // UseReducer to manage loading, error, and response states
   const [{ loading, summary, error }, dispatch] = useReducer(logger(reducer), {
     loading: true,
-    error: "", 
+    error: "",
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  // Fetch summary data on component load
   useEffect(() => {
     const fetchData = async () => {
       try {

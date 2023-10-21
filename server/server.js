@@ -1,9 +1,7 @@
 import express from "express";
-
 import dotenv from "dotenv";
-import cors from "cors"
+import cors from "cors";
 import mongoose from "mongoose";
-
 import productRouter from "./routes/productRoutes.js";
 import seedRouter from "./routes/seedRoutes.js";
 import { userRouter } from "./routes/userRoutes.js";
@@ -13,35 +11,39 @@ const app = express();
 
 dotenv.config();
 
+// Connect to the MongoDB database
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("connected to mongoo");
+    console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.log(err.message);
   });
 
+// Define CORS options for allowing requests from a specific origin
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3000", // You can change this to your client's origin
   optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions)); 
+app.use(cors(corsOptions));
 
+// Parse JSON and URL-encoded request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/seed", seedRouter);
-app.use("/api/products", productRouter);
-app.use("/api/users", userRouter);
-app.use("/api/orders", orderRouter);
+// Define routes for various resources
+app.use("/api/seed", seedRouter); // For seeding data
+app.use("/api/products", productRouter); // For product-related routes
+app.use("/api/users", userRouter); // For user-related routes
+app.use("/api/orders", orderRouter); // For order-related routes
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`server running at ${port}`);
+  console.log(`Server is running at port ${port}`);
 });
- 

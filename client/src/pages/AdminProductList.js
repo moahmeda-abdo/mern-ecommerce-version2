@@ -17,7 +17,6 @@ const reducer = (state, action) => {
       return { ...state, loading: false, products: action.payload };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-
     default:
       return state;
   }
@@ -27,31 +26,36 @@ export default function AdminProductList() {
   const navigate = useNavigate();
   const { state } = useContext(Store);
   const { userInfo } = state;
+
+  // Use a reducer to manage state changes
   const [{ products, loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
     products: [],
   });
-  
+
+  // Function to handle product deletion
   const handleDelete = async (productId) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this product?"
     );
     if (confirmed) {
       try {
+        // Send a request to delete the product
         const { response } = await axios.delete(`/api/products/${productId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         setTimeout(function () {
           window.location.reload();
         }, 3000);
+        // Show a success toast message
         toast.success("Product deleted successfully", {
           position: "bottom-center",
           autoClose: 3000,
         });
       } catch (error) {
-
-        Toast.error("Error deleting product. Please try again.", {
+        // Show an error toast message if there's an issue
+        toast.error("Error deleting product. Please try again.", {
           position: "top-right",
           autoClose: 3000,
         });
@@ -60,6 +64,7 @@ export default function AdminProductList() {
   };
 
   useEffect(() => {
+    // Fetch product data when the component mounts
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -83,7 +88,7 @@ export default function AdminProductList() {
       <Helmet>
         <title>All products</title>
       </Helmet>
-      <h1  className="main-haeding  my-3">All Products</h1>
+      <h1 className="main-heading my-3">All Products</h1>
       <table className="table">
         <thead>
           <tr>
@@ -103,7 +108,7 @@ export default function AdminProductList() {
               <strong>BRAND</strong>
             </td>
             <td>
-              <strong>AVAILABLITY</strong>
+              <strong>AVAILABILITY</strong>
             </td>
             <td>
               <strong>CREATION DATE</strong>
@@ -121,7 +126,6 @@ export default function AdminProductList() {
               <td>{product.countInStock}</td>
               <td>{product.createdAt.slice(0, 10)}</td>
               <td>
-                {" "}
                 <Button
                   type="button"
                   variant="light"
@@ -133,7 +137,6 @@ export default function AdminProductList() {
                 </Button>
               </td>
               <td>
-                {" "}
                 <Button
                   type="button"
                   variant="light"

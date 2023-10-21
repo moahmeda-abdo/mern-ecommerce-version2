@@ -7,13 +7,18 @@ import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "./Store";
 
-export default function ShippingAddresspage() {
+export default function ShippingAddressPage() {
+  // Initialize necessary hooks and context
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
+
+  // Extract user information and shipping address from the global state
   const {
     userInfo,
     cart: { shippingAddress },
   } = state;
+
+  // Initialize local state variables to manage form input
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [phoneNumber, setPhoneNumber] = useState(
     shippingAddress.phoneNumber || ""
@@ -24,13 +29,19 @@ export default function ShippingAddresspage() {
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ""
   );
+
+  // Redirect to sign-in page if the user is not authenticated
   useEffect(() => {
     if (!userInfo) {
       navigate("/signin?redirect=/shipping");
     }
   }, [userInfo, navigate]);
+
+  // Handle form submission
   const submitHandler = (e) => {
     e.preventDefault();
+
+    // Dispatch an action to save the shipping address in the global state
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
       payload: {
@@ -42,6 +53,8 @@ export default function ShippingAddresspage() {
         country,
       },
     });
+
+    // Store the shipping address in local storage for persistence
     localStorage.setItem(
       "shippingAddress",
       JSON.stringify({
@@ -53,17 +66,22 @@ export default function ShippingAddresspage() {
         country,
       })
     );
+
+    // Navigate to the payment page
     navigate("/payment");
   };
+
   return (
     <div>
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
 
+      {/* Display checkout steps for navigation progress */}
       <CheckoutSteps step1 step2></CheckoutSteps>
+
       <div className="container small-container">
-        <h1 className="main-haeding  my-3">Shipping Address</h1>
+        <h1 className="main-heading my-3">Shipping Address</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Label>Full Name</Form.Label>

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
 import { getError } from "../utils";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -12,6 +11,7 @@ import Button from "react-bootstrap/Button";
 import { Store } from "./Store";
 import { toast } from "react-toastify";
 
+// Define a reducer for managing state
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -30,6 +30,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 export default function AdminUpdateProduct() {
   const navigate = useNavigate();
   const params = useParams();
@@ -38,11 +39,13 @@ export default function AdminUpdateProduct() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  // Use a reducer to manage state changes
   const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
 
+  // State variables for form inputs
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [price, setPrice] = useState("");
@@ -52,10 +55,12 @@ export default function AdminUpdateProduct() {
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
+  // Function to handle form submission
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       dispatch({ type: "UPDATE_REQUEST" });
+      // Send a PUT request to update the product
       await axios.put(
         `/api/products/${productId}`,
         {
@@ -83,6 +88,8 @@ export default function AdminUpdateProduct() {
       dispatch({ type: "UPDATE_FAIL" });
     }
   };
+
+  // Fetch product data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -110,9 +117,9 @@ export default function AdminUpdateProduct() {
   return (
     <Container className="small-container">
       <Helmet>
-        <title>Edit Product ${productId}</title>
+        <title>Edit Product {productId}</title>
       </Helmet>
-      <h1  className="main-haeding  my-3">Edit Product {productId}</h1>
+      <h1 className="main-heading my-3">Edit Product {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>

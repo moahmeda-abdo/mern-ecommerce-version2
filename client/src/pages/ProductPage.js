@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
+import Button from "react-bootstrap/esm/Button";
 import Rating from "../components/Rating";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
@@ -15,36 +15,42 @@ import { getError } from "../utils";
 import { Store } from "./Store";
 import Form from "react-bootstrap/Form";
 import { toast } from "react-toastify";
-import { FloatingLabel } from 'react-bootstrap';
+import { FloatingLabel } from "react-bootstrap";
+
+// Define a reducer for handling state updates
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "REFRESH_PRODUCT":
+      return { ...state, product: action.payload };
+    case "CREATE_REQUEST":
+      return { ...state, loadingCreateReview: true };
+    case "CREATE_SUCCESS":
+      return { ...state, loadingCreateReview: false };
+    case "CREATE_FAIL":
+      return { ...state, loadingCreateReview: false };
+    case "FETCH_REQUEST":
+      return { ...state, loading: true };
+    case "FETCH_SUCCESS":
+      return { ...state, loading: false, product: action.payload };
+    case "FETCH_FAIL":
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 export default function ProductPage() {
+  // Create a ref for reviews section
   let reviewsRef = useRef();
+  // Define states for rating and comment
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
+  // Get the product slug from the route parameters
   const params = useParams();
   const { slug } = params;
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "REFRESH_PRODUCT":
-        return { ...state, product: action.payload };
-      case "CREATE_REQUEST":
-        return { ...state, loadingCreateReview: true };
-      case "CREATE_SUCCESS":
-        return { ...state, loadingCreateReview: false };
-      case "CREATE_FAIL":
-        return { ...state, loadingCreateReview: false };
-      case "FETCH_REQUEST":
-        return { ...state, loading: true };
-      case "FETCH_SUCCESS":
-        return { ...state, loading: false, product: action.payload };
-      case "FETCH_FAIL":
-        return { ...state, loading: false, error: action.payload };
-      default:
-        return state;
-    }
-  };
 
+  // Initialize the state and dispatch function using the reducer
   const [{ loading, error, product, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
       product: [],
@@ -52,6 +58,7 @@ export default function ProductPage() {
       error: "",
     });
 
+  // Handle review submission
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!comment || !rating) {
@@ -71,10 +78,12 @@ export default function ProductPage() {
         type: "CREATE_SUCCESS",
       });
       toast.success("Review submitted successfully");
+      // Update the product details with new review data
       product.reviews.unshift(data.review);
       product.numReviews = data.numReviews;
       product.rating = data.rating;
       dispatch({ type: "REFRESH_PRODUCT", payload: product });
+      // Scroll to the reviews section
       window.scrollTo({
         behavior: "smooth",
         top: reviewsRef.current.offsetTop,
@@ -84,7 +93,9 @@ export default function ProductPage() {
       dispatch({ type: "CREATE_FAIL" });
     }
   };
+
   useEffect(() => {
+    // Fetch product data based on the slug
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
 
@@ -98,8 +109,11 @@ export default function ProductPage() {
     fetchData();
   }, [slug]);
 
+  // Get user info and cart data from the global state
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
+
+  // Handle adding the product to the cart
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -134,7 +148,7 @@ export default function ProductPage() {
               <Helmet>
                 <title>{product.name}</title>
               </Helmet>
-              <h1 >{product.name}</h1>
+              <h1>{product.name}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
@@ -172,7 +186,6 @@ export default function ProductPage() {
                     </Col>
                   </Row>
                 </ListGroup.Item>
-
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className="d-grid">
@@ -220,7 +233,7 @@ export default function ProductPage() {
                   <option value="2">2- Fair</option>
                   <option value="3">3- Good</option>
                   <option value="4">4- Very good</option>
-                  <option value="5">5- Excelent</option>
+                  <option value="5">5- Excellent</option>
                 </Form.Select>
               </Form.Group>
               <FloatingLabel

@@ -41,12 +41,12 @@ function App() {
         const { data } = await axios.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
-        toast.error(getError(err));
-getError(err)
+        toast.error(getError(err)); // Display an error toast if fetching categories fails
       }
     };
     fetchCategories();
   }, []);
+
   return (
     <>
       <BrowserRouter>

@@ -7,11 +7,10 @@ import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 export default function UserProfile() {
   const navigate = useNavigate();
 
-  const { state} = useContext(Store);
+  const { state } = useContext(Store);
   const { userInfo } = state;
 
-
-
+  // Redirect to sign-in page if userInfo is not available
   useEffect(() => {
     if (!userInfo) {
       navigate("/signin");
@@ -26,7 +25,7 @@ export default function UserProfile() {
           <Col md={6}>
             <Card>
               <Card.Header>
-                <h1  className="  mb-0">User Profile</h1>
+                <h1 className="mb-0">User Profile</h1>
               </Card.Header>
               <Card.Body>
                 <Form.Group>
