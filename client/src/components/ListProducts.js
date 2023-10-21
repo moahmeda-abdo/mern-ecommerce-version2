@@ -8,7 +8,7 @@ import MessageBox from "../components/MessageBox";
 
 export default function ListProducts() {
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(25);
+  const [pageSize, setPageSize] = useState(20);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -18,12 +18,19 @@ export default function ListProducts() {
       const result = await axios.get(
         `http://localhost:5000/api/products?page=${page}&pageSize=${pageSize}`
       );
-      setProducts((prevProducts) => [...prevProducts, ...result.data.products]);
+
+      const newProducts = result.data.products.filter((product) => {
+        // Check if the product doesn't already exist in the products array
+        return !products.some(
+          (existingProduct) => existingProduct._id === product._id
+        );
+      });
+
+      setProducts((prevProducts) => [...prevProducts, ...newProducts]);
     } catch (error) {
       setError(error.message);
     }
   };
-
   const handleScroll = () => {
     // if (
     //   window.innerHeight + document.documentElement.scrollTop + 10 >=

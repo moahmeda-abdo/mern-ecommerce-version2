@@ -100,7 +100,7 @@ const handleCreateProdcutsForAdmin = expressAsyncHandler(async (req, res) => {
     name:name,
     category:category,
     slug:slug,
-    price:slug,
+    price:price,
     description:description,
     countInStock:countInStock,
     image:image,

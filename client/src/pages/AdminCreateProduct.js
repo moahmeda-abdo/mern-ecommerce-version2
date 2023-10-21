@@ -15,17 +15,18 @@ const reducer = (state, action) => {
     case "CREATE_REQUEST":
       return { ...state, loading: true };
     case "CREATE_SUCCESS":
-      return { ...state, loading: false, res: action.paylaod };
+      return { ...state, loading: false, response: action.payload };
     case "CREATE_FAIL":
-      return { ...state, loading: false, error: action.paylaod };
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
 };
+
 export default function AdminCreateProduct() {
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error, response }, dispatach] = useReducer(reducer, {
+  const [{ loading, error, response }, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
     response: "",
@@ -33,16 +34,16 @@ export default function AdminCreateProduct() {
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
-  const [countInStock, setCountInStock] = useState("");
+  const [countInStock, setCountInStock] = useState(0);
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
-
+  const [image, setImage] = useState(null);
+  
   const submitHandler = async (e) => {
     e.preventDefault();
-    dispatach({ type: "CREATE_REQUEST" });
+    dispatch({ type: "CREATE_REQUEST" });
     const imageUrl = await uploadToCloud(image);
 
     const productData = {
@@ -60,19 +61,11 @@ export default function AdminCreateProduct() {
       const response = axios.post("/api/products/create", productData, {
         headers: { authorization: `Bearer ${userInfo.token}` },
       });
-      dispatach({ type: "CREATE_SUCCESS", paylaod: response });
+      dispatch({ type: "CREATE_SUCCESS", payload: response });
 
       toast.success("Product created successfully!");
-      setName("");
-      setSlug("");
-      setPrice("");
-      setCategory("");
-      setCountInStock("");
-      setBrand("");
-      setDescription("");
-      setImage("");
     } catch (error) {
-      dispatach({ type: "CREATE_FAIL", paylaod: getError(error) });
+      dispatch({ type: "CREATE_FAIL", payload: getError(error) });
     }
   };
 
@@ -90,14 +83,14 @@ export default function AdminCreateProduct() {
       console.log(error);
     }
   };
+
   return (
     <div>
       <Helmet>
         <title>Create products</title>
       </Helmet>
-      <h1  className="main-haeding  my-3">Create Product</h1>
+      <h1 className="main-heading my-3">Create Product</h1>
 
-      <div></div>
       <div>
         <Form onSubmit={submitHandler}>
           <Row className="mb-3">
@@ -149,8 +142,8 @@ export default function AdminCreateProduct() {
               <Form.Control
                 required
                 type="number"
-                placeholder="Price $ (numbers only !)"
-                onChange={(e) => setSlug(e.target.value)}
+                placeholder="Price $ (numbers only!)"
+                onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
 
@@ -159,7 +152,7 @@ export default function AdminCreateProduct() {
               <Form.Control
                 required
                 type="number"
-                placeholder="Count In Stock (numbers only !)"
+                placeholder="Count In Stock (numbers only!)"
                 onChange={(e) => setCountInStock(e.target.value)}
               />
             </Form.Group>
@@ -186,10 +179,10 @@ export default function AdminCreateProduct() {
           </Form.Group>
 
           <Button variant="primary" type="submit">
-            Createe
+            Create
           </Button>
 
-          {loading ? <LoadingBox></LoadingBox> : null}
+          {loading ? <LoadingBox /> : null}
           {error && <div className="error-message">{error}</div>}
         </Form>
       </div>

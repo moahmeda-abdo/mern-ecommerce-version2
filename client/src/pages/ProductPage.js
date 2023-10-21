@@ -143,6 +143,7 @@ export default function ProductPage() {
               ></Rating>
             </ListGroup.Item>
             <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+            <ListGroup.Item>Brand : {product.brand}</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>
