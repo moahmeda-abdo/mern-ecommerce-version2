@@ -42,7 +42,7 @@ export default function OrderHistoryScreen() {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
         const { data } = await axios.get(
-          `https://main--playful-phoenix-2280d5.netlify.app/api/orders/orderhistory`,
+          `/api/orders/orderhistory`,
           // Include the user's authorization token in the request headers
           { headers: { Authorization: `Bearer ${userInfo.token}` } }
         );

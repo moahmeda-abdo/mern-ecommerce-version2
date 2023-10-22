@@ -67,7 +67,7 @@ export default function ProductPage() {
     }
     try {
       const { data } = await axios.post(
-        `https://main--playful-phoenix-2280d5.netlify.app/api/products/${product._id}/reviews`,
+        `/api/products/${product._id}/reviews`,
         { rating, comment, name: userInfo.name },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

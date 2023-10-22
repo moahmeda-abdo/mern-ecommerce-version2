@@ -70,7 +70,7 @@ export default function AdminListUsers() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `https://main--playful-phoenix-2280d5.netlify.app/api/users`,
+          `/api/users`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }

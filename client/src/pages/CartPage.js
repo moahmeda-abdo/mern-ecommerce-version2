@@ -29,7 +29,7 @@ export default function CartPage() {
   const updateCartHandler = async (item, quantity) => {
     // Fetch product data from the API to check if it's in stock
     const { data } = await axios.get(
-      `https://main--playful-phoenix-2280d5.netlify.app/api/products/${item._id}`
+      `/api/products/${item._id}`
     );
 
     // Check if the requested quantity exceeds the available stock

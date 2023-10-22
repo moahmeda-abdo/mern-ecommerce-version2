@@ -69,7 +69,7 @@ export default function AdminProductList() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          "https://main--playful-phoenix-2280d5.netlify.app/api/products/admin",
+          "/api/products/admin",
           {
             headers: { authorization: `Bearer ${userInfo.token}` },
           }

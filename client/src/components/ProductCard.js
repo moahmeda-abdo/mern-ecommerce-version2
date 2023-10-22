@@ -20,7 +20,7 @@ function ProductCard(props) {
 
     // Fetch the product's details from the server
     const { data } = await axios.get(
-      `https://main--playful-phoenix-2280d5.netlify.app//api/products/${item._id}`
+      `/api/products/${item._id}`
     );
 
     // Check if the product is out of stock

@@ -40,7 +40,7 @@ function App() {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(
-          `https://main--playful-phoenix-2280d5.netlify.app/api/products/categories`
+          `/api/products/categories`
         );
         setCategories(data);
       } catch (err) {

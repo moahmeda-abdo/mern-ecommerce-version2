@@ -44,7 +44,7 @@ export default function DashboardScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("https://main--playful-phoenix-2280d5.netlify.app/api/orders/summary", {
+        const { data } = await axios.get("api/orders/summary", {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });

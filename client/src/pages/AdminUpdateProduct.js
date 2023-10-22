@@ -95,7 +95,7 @@ export default function AdminUpdateProduct() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `https://main--playful-phoenix-2280d5.netlify.app/api/products/${productId}`
+          `/api/products/${productId}`
         );
         setName(data.name);
         setSlug(data.slug);

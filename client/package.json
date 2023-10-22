@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "proxy": "https://main--playful-phoenix-2280d5.netlify.app",
+  "proxy": "https://server-e-commerce-txaw.onrender.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

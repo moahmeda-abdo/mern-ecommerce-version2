@@ -25,7 +25,7 @@ export default function AdminListOrders() {
   const fetchData = async () => {
     try {
       const { data } = await axios.get(
-        `https://main--playful-phoenix-2280d5.netlify.app/api/orders/ordersList?page=${page}&pageSize=${pageSize}`,
+        `api/orders/ordersList?page=${page}&pageSize=${pageSize}`,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }

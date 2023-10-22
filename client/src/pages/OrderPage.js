@@ -51,7 +51,7 @@ export default function OrderPage() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
-          `https://main--playful-phoenix-2280d5.netlify.app/api/orders/${orderId}`,
+          `/api/orders/${orderId}`,
           {
             // Include the user's authorization token in the request headers
             headers: { authorization: `Bearer ${userInfo.token}` },

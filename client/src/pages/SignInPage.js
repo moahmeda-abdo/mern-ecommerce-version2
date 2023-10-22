@@ -30,7 +30,7 @@ export default function SignInPage() {
     try {
       // Send a POST request to sign in the user
       const { data } = await axios.post(
-        "https://main--playful-phoenix-2280d5.netlify.app/api/users/signin",
+        "/api/users/signin",
         {
           email,
           password,

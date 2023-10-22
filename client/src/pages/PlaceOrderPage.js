@@ -79,7 +79,7 @@ export default function PlaceOrderPage() {
 
       // Update product stock
       const { updateproduct } = await axios.put(
-        "https://main--playful-phoenix-2280d5.netlify.app//api/products/updateproduct",
+        "/api/products/updateproduct",
         {
           products: productData,
         }
