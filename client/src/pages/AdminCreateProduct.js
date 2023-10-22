@@ -68,7 +68,7 @@ export default function AdminCreateProduct() {
 
     try {
       // Send a POST request to create a new product
-      const response = axios.post("/api/products/create", productData, {
+      const response = axios.post("https://main--playful-phoenix-2280d5.netlify.app/api/products/create", productData, {
         headers: { authorization: `Bearer ${userInfo.token}` },
       });
       dispatch({ type: "CREATE_SUCCESS", payload: response });

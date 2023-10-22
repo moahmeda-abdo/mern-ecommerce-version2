@@ -78,9 +78,12 @@ export default function PlaceOrderPage() {
       });
 
       // Update product stock
-      const { updateproduct } = await axios.put("/api/products/updateproduct", {
-        products: productData,
-      });
+      const { updateproduct } = await axios.put(
+        "https://main--playful-phoenix-2280d5.netlify.app//api/products/updateproduct",
+        {
+          products: productData,
+        }
+      );
 
       // Clear the cart and navigate to the order details page
       ctxDispatch({ type: "CART_CLEAR" });

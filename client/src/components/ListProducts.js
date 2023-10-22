@@ -16,7 +16,7 @@ export default function ListProducts() {
   const fetchProducts = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:5000/api/products?page=${page}&pageSize=${pageSize}`
+        `https://main--playful-phoenix-2280d5.netlify.app/api/products?page=${page}&pageSize=${pageSize}`
       );
 
       // Filter out products that are already in the 'products' array

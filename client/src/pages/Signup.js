@@ -38,11 +38,14 @@ export default function SignUpPage() {
 
     try {
       // Send a POST request to create a new user
-      const { data } = await axios.post('/api/users/signup', {
-        name,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://main--playful-phoenix-2280d5.netlify.app/api/users/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       // Update the global user information
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });

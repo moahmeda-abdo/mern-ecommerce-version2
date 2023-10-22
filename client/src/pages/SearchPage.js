@@ -53,7 +53,7 @@ export default function SearchPage() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}`
+          `https://main--playful-phoenix-2280d5.netlify.app/api/products/search?page=${page}&query=${query}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {

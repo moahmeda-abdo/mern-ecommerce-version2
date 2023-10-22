@@ -50,10 +50,13 @@ export default function OrderPage() {
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
-          // Include the user's authorization token in the request headers
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `https://main--playful-phoenix-2280d5.netlify.app/api/orders/${orderId}`,
+          {
+            // Include the user's authorization token in the request headers
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (error) {
         // Handle fetch error and update component state

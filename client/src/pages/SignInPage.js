@@ -29,10 +29,13 @@ export default function SignInPage() {
     e.preventDefault();
     try {
       // Send a POST request to sign in the user
-      const { data } = await axios.post("/api/users/signin", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://main--playful-phoenix-2280d5.netlify.app/api/users/signin",
+        {
+          email,
+          password,
+        }
+      );
 
       // Update the global user information
       ctxDispatch({ type: "USER_SIGNIN", payload: data });

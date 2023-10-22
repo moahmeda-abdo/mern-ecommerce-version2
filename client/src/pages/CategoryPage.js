@@ -52,7 +52,7 @@ export default function CategoryPage() {
       try {
         // Fetch products based on the category and page from the API
         const { data } = await axios.get(
-          `/api/products/category?page=${page}&query=${query}`
+          `https://main--playful-phoenix-2280d5.netlify.app/api/products/category?page=${page}&query=${query}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {

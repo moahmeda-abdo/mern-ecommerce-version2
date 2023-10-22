@@ -19,7 +19,9 @@ function ProductCard(props) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
 
     // Fetch the product's details from the server
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await axios.get(
+      `https://main--playful-phoenix-2280d5.netlify.app//api/products/${item._id}`
+    );
 
     // Check if the product is out of stock
     if (data.countInStock < quantity) {

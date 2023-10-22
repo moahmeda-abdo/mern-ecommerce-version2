@@ -38,7 +38,9 @@ function App() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data } = await axios.get(
+          `https://main--playful-phoenix-2280d5.netlify.app/api/products/categories`
+        );
         setCategories(data);
       } catch (err) {
         toast.error(getError(err)); // Display an error toast if fetching categories fails
@@ -83,7 +85,10 @@ function App() {
           <div className="d-flex flex-column site-container">
             <Container>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="https://main--playful-phoenix-2280d5.netlify.app/"
+                  element={<HomePage />}
+                />
                 <Route path="/products/:slug" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/signin" element={<SignInPage />} />
