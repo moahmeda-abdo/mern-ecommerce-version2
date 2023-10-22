@@ -87,7 +87,7 @@ function App() {
             <Container>
               <Routes>
                 <Route
-                  path="https://main--playful-phoenix-2280d5.netlify.app"
+                  path="https://client-for-ecommerce-ns4i.vercel.app/"
                   element={<HomePage />}
                 />
                 <Route path="/products/:slug" element={<ProductPage />} />
