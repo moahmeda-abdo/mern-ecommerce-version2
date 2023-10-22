@@ -29,6 +29,7 @@ import AdminListUsers from "./pages/AdminListUsers";
 import Footer from "./components/Footer";
 import SearchPage from "./pages/SearchPage";
 import CategoryPage from "./pages/CategoryPage";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,6 +100,7 @@ function App() {
                 <Route path="/order/:id" element={<OrderPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/category" element={<CategoryPage />} />
+                <Route path="*" element={<PageNotFound />} />
                 <Route
                   path="/orderhistory"
                   element={
