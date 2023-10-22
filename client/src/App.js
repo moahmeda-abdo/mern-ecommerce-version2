@@ -86,7 +86,7 @@ function App() {
             <Container>
               <Routes>
                 <Route
-                  path="https://main--playful-phoenix-2280d5.netlify.app/"
+                  path="https://main--playful-phoenix-2280d5.netlify.app"
                   element={<HomePage />}
                 />
                 <Route path="/products/:slug" element={<ProductPage />} />
